@@ -4,9 +4,13 @@ import uuid
 
 requirements = parse_requirements('requirements.txt', session=uuid.uuid1())
 install_requires = [str(r.req) for r in requirements]
-description = (
-    "nflex-connector-utils provides a suite of tools to produce data "
-    "structures when implementing resources connector nflex modules.")
+description = ("""
+    nflex-connector-utils provides a suite of tools to produce data structures
+    when implementing resources connector nflex modules.
+    See github_ for the documentation.
+
+    .. _github: https://github.com/ntt-nflex/nflex_connector_utils
+""")
 
 with open('README.md') as f:
     long_description = f.read()
