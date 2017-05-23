@@ -13,7 +13,7 @@ clean-python:
 
 .PHONY : clean-package
 clean-package:
-	rm -rf dist nflex-provider-utils.egg-info
+	rm -rf dist nflex-connector-utils.egg-info
 
 .PHONY : clean
 clean: clean-tox clean-python clean-package

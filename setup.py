@@ -12,7 +12,7 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(
-    name="nflex-provider-utils",
+    name="nflex-connector-utils",
     version="0.1.0",
     description=description,
     long_description=long_description,
