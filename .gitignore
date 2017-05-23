@@ -1,0 +1,12 @@
+*.pyc
+__pycache__
+*.swp
+.DS_Store
+._*
+._.DS_Store
+*.egg-info*
+.cache/v/cache/lastfailed
+*~
+\#*#
+.#*
+*#
