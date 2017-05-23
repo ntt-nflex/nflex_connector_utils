@@ -28,4 +28,4 @@ package: clean-package
 
 .PHONY : upload
 upload:
-	python setup.py sdist upload
+	python setup.py sdist upload -r https://pypi.python.org/pypi
