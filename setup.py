@@ -17,7 +17,7 @@ with open('README.md') as f:
 
 setup(
     name="nflex-connector-utils",
-    version="0.1.2",
+    version="0.1.3",
     description=description,
     long_description=long_description,
     url='http://www.ntt.com',
