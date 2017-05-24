@@ -18,7 +18,7 @@ See github_ for the documentation.
 
 setup(
     name="nflex-connector-utils",
-    version="0.1.5",
+    version="0.1.6",
     description=description,
     long_description=long_description,
     url='http://www.ntt.com',
