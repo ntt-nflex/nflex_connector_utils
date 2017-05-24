@@ -1,6 +1,9 @@
 class Connections(object):
-    def __init__(self):
+    def __init__(self, type=None, connections=None, appliances=None,
+                 servers=None, networks=None, volumes=None):
         self.data = {}
+        self.add(type=type, connections=connections, appliances=appliances,
+                 servers=servers, networks=networks, volumes=volumes)
 
     def _add_type(self, type_, connections):
         if connections is None or len(connections) == 0:
