@@ -22,7 +22,10 @@ class Volume(Resource):
                 "encrypted": self.encrypted,
                 "iops": iops,
                 "size_b": self.size_b,
-                "zone_name": self.zone_name,
             }
         }
+
+        if self.zone_name is not None:
+            data['details']['zone_name'] = self.zone_name
+
         return data
