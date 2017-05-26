@@ -1,3 +1,5 @@
+DIRTY=$(shell python -c "import versioneer; print versioneer.get_versions()['dirty']")
+
 all: doc package
 
 .PHONY : setup
@@ -40,6 +42,8 @@ watch-docs-mac:
 package: clean-package
 	python setup.py sdist
 
-.PHONY : upload
+.PHONY :
 upload:
+	@test -z "$$(git status --short)" || (echo branch is not clean && git status --short && false)
+	@test -n "$(VERSION)" || (echo package is dirty && false)
 	python setup.py sdist upload -r https://pypi.python.org/pypi

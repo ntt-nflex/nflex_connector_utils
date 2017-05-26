@@ -1,2 +1,5 @@
 include requirements.txt
 include README.md
+include versioneer.py
+include _version.py
+include nflex_connector_utils/_version.py

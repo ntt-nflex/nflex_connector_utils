@@ -1,6 +1,7 @@
 from pip.req import parse_requirements
-from setuptools import setup, find_packages
 import uuid
+import versioneer
+from setuptools import setup, find_packages
 
 requirements = parse_requirements('requirements.txt', session=uuid.uuid1())
 install_requires = [str(r.req) for r in requirements]
@@ -18,7 +19,8 @@ See github_ for the documentation.
 
 setup(
     name="nflex-connector-utils",
-    version="0.1.6",
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description=description,
     long_description=long_description,
     url='http://www.ntt.com',

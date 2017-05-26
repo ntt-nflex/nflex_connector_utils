@@ -26,7 +26,16 @@ A Makefile has been included to do most common development things.
 ```sh
 make clean
 make setup
+make doc
 make test
 make package
+```
+
+# Package Release procedure
+Versioneer is used for releasing the package. To release one, just create a tag and run:
+```sh
+git push origin
+git tag vx.y.z
+git push origin vx.y.z
 make upload
 ```
