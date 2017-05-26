@@ -42,8 +42,7 @@ watch-docs-mac:
 package: clean-package
 	python setup.py sdist
 
-.PHONY :
+.PHONY : upload
 upload:
 	@test -z "$$(git status --short)" || (echo branch is not clean && git status --short && false)
-	@test -n "$(VERSION)" || (echo package is dirty && false)
 	python setup.py sdist upload -r https://pypi.python.org/pypi
