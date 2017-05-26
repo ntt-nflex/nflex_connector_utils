@@ -4,6 +4,17 @@ import six
 
 
 def convert_datetime(dt):
+    """
+        Convert a datetime or timestamp string to an RFC 3339 timestamp. A
+        ``None`` is returned as a ``None``.
+
+        Args:
+            dt (str, datetime or None): Input. This can be a string timestamp to be parsed, a datetime object or a ``None``.
+
+        Returns:
+            str: A RFC 3339 timestamp
+    """
+
     if dt is None or dt == '':
         return None
     if isinstance(dt, six.string_types):

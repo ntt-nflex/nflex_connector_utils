@@ -1,3 +1,5 @@
+all: doc package
+
 .PHONY : setup
 setup:
 	tox -e devenv -v
@@ -15,12 +17,24 @@ clean-python:
 clean-package:
 	rm -rf dist nflex-connector-utils.egg-info
 
+.PHONY: clean-docs
+clean-docs:
+	cd doc && make clean
+
 .PHONY : clean
-clean: clean-tox clean-python clean-package
+clean: clean-tox clean-python clean-package clean-docs
 
 .PHONY : test
 test:
 	tox
+
+.PHONY : doc
+doc:
+	cd doc && make html
+
+.PHONY: watch-docs-mac
+watch-docs-mac:
+	cd doc && ./watch-docs-mac.sh
 
 .PHONY : package
 package: clean-package

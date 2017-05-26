@@ -1,4 +1,31 @@
 class Connections(object):
+    """
+        A representation of inter-resource associations.
+
+        Args:
+            type (str): The type of resource to add connections to, e.g. ``server``
+            connections (str): When used together with ``type``, a list of associated resource ids
+            appliances (str): an optional list of appliance ids
+            servers (str): an optional list of server ids
+            networks (str): an optional list of network ids
+            volumes (str): an optional list of volume ids
+
+        Examples:
+            Create a bunch of connections to a server::
+
+                Connections(type='server', connections=['server-1', 'server-2'])
+
+            Create a connection to two volumes and a network::
+
+                Connections(networks=['network-1'], volumes=['volume-1', 'volume-2'])
+
+            Incrementally add connections::
+
+                c = Connections()
+                c.add(type='appliances', connections='appliance-1').add(servers=['server-1'])
+                c.add(networks=['network-1'])
+
+    """
     def __init__(self, type=None, connections=None, appliances=None,
                  servers=None, networks=None, volumes=None):
         self.data = {}
@@ -18,6 +45,21 @@ class Connections(object):
 
     def add(self, type=None, connections=None, appliances=None, servers=None,
             networks=None, volumes=None):
+        """
+            Add a connection
+
+            Args:
+                type (str): The type of resource to add connections to, e.g. ``server``
+                connections (str): When used together with ``type``, a list of associated resource ids
+                appliances (str): an optional list of appliance ids
+                servers (str): an optional list of server ids
+                networks (str): an optional list of network ids
+                volumes (str): an optional list of volume ids
+
+            Returns:
+                :py:class:`nflex_connector_utils.connections.Connections`: returns itself, so that ``add`` methods can be chained
+        """
+
         if type is not None and connections is not None:
             self._add_type(type, connections)
 
@@ -29,4 +71,6 @@ class Connections(object):
         return self
 
     def serialize(self):
+        """Serialize the contents"""
+
         return self.data

@@ -2,6 +2,14 @@ import httplib
 
 
 def set_task_percentage(context, task_id, percentage):
+    """
+        Update the percentage of a running CMP account sync task
+
+        Args:
+            task_id (str): The CMP uuid identifying the task. This can be found in the ``task_id`` key in the event.
+            percentage (int): Percentage
+    """  # noqa
+
     if task_id is None:
         return
 

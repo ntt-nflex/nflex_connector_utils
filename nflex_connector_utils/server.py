@@ -2,6 +2,25 @@ from . import Resource
 
 
 class Server(Resource):
+    """
+        A representation of a server
+
+        Args:
+            base (base): See :py:class:`nflex_connector_utils.resource.Resource` for common resource args.
+            cpu_hz (int): Optional CPU Speed in Hz
+            cpu_cores (int): Optional number of CPU cores
+            ram_b (int): Optional RAM size in bytes
+            volumes_b: Optional  total volume size in bytes
+            state: CMP state. Must be one of: ``unknown``, ``pending``, ``running``, ``shutting``, ``terminated``, ``stopping``, ``stopped``,
+            provider_state (str): Optional provider description of the state, can be any text.
+            instance_type (str): Optional text value describing the instance type
+            is_virtual (bool): Optional, set to ``True`` if the server is physical. Defaults to ``False``.
+            image_detail (:py:class:`nflex_connector_utils.image_detail.ImageDetail`): An optional :py:class:`nflex_connector_utils.image_detail.ImageDetail` object
+            ip_addresses (:py:class:`nflex_connector_utils.ip_address.IpAddress`): An optional :py:class:`nflex_connector_utils.ip_address.IpAddress` object
+
+
+    """  # noqa
+
     def __init__(self, cpu_hz=None, cpu_cores=None, ram_b=None, volumes_b=None,
                  state=None, provider_state=None, image_detail=None,
                  instance_type=None, ip_addresses=None,
@@ -29,6 +48,8 @@ class Server(Resource):
         self.ip_addresses = ip_addresses
 
     def serialize(self):
+        """Serialize the contents"""
+
         data = super(Server, self).serialize()
 
         ip_addresses = [ip.serialize() for ip in self.ip_addresses]
