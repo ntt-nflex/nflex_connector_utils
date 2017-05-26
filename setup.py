@@ -12,10 +12,11 @@ description = """
 long_description = """
 nflex-connector-utils provides a suite of tools to produce data structures
 when implementing resources connector nflex modules.
-See github_ for the documentation.
+See readthedocs_ for the documentation and github_ for the source.
 
 .. _github: https://github.com/ntt-nflex/nflex_connector_utils
-"""
+.. _readthedocs: http://nflex-connector-utils.readthedocs.io/en/latest/index.html
+"""  # noqa
 
 setup(
     name="nflex-connector-utils",

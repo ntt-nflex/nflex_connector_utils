@@ -1,6 +1,7 @@
 # Nflex Connector Utils
 
-This python package provides a suite of tools to produce data structures when implementing resources connector nflex modules.
+This python package provides a suite of tools to produce data structures when implementing resources connector nflex modules. See the documentation on [readthedocs.org](http://nflex-connector-utils.readthedocs.io/en/latest/index.html).
+
 
 # Installation
 ```sh
