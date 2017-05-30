@@ -22,6 +22,8 @@ def get(event, context):
     ])
 ```
 
+More examples are present on [readthedocs.org](http://nflex-connector-utils.readthedocs.io/en/latest/index.html).
+
 # Development
 A Makefile has been included to do most common development things.
 ```sh
