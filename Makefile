@@ -2,8 +2,9 @@ DIRTY=$(shell python -c "import versioneer; print versioneer.get_versions()['dir
 
 all: doc package
 
-.PHONY : setup
-setup:
+setup: devenv
+
+devenv:
 	tox -e devenv -v
 
 .PHONY : clean-tox
@@ -17,7 +18,7 @@ clean-python:
 
 .PHONY : clean-package
 clean-package:
-	rm -rf dist nflex-connector-utils.egg-info
+	rm -rf non-git/nflex_connector_utils.egg-info dist nflex-connector-utils.egg-info
 
 .PHONY: clean-docs
 clean-docs:
@@ -29,6 +30,10 @@ clean: clean-tox clean-python clean-package clean-docs
 .PHONY : test
 test:
 	tox
+
+.PHONY : test-coverage
+test-coverage: devenv
+	devenv/bin/py.test -v --cov-report=term-missing --cov=nflex_connector_utils
 
 .PHONY : doc
 doc:

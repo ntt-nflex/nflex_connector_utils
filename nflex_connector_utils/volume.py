@@ -39,6 +39,6 @@ class Volume(Resource):
         }
 
         if self.zone_name is not None:
-            data['details']['zone_name'] = self.zone_name
+            data['details']['volume']['zone_name'] = self.zone_name
 
         return data

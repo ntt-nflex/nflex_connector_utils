@@ -67,7 +67,7 @@ class ImageDetailMap(object):
         self.mapping = mapping
 
     def get(self, id=None, name=None, version=None, type=None,
-            architecture=None):
+            architecture=None, distribution=None):
         """
             Lookup an image. If none is found, an image is returned with no data in it.
             Use the arguments to override individual details.
@@ -92,6 +92,7 @@ class ImageDetailMap(object):
         mtype = mtype or type
         mversion = mversion or version
         march = march or architecture
+        mdist = mdist or distribution
 
         return ImageDetail(
             id=id,
