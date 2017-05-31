@@ -42,3 +42,9 @@ git tag vx.y.z
 git push origin vx.y.z
 make upload
 ```
+
+# Testing
+Just run tox
+```sh
+tox
+```
