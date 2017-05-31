@@ -17,14 +17,14 @@ class ImageDetail(object):
 
     def __init__(self, id=None, name=None, type=None, distribution=None,
                  version=None, architecture=None):
-        self.id = id
-        self.name = name
-        self.type = type
-        self.distribution = distribution
-        self.version = version
-        self.architecture = architecture
+        self._id = id
+        self._name = name
+        self._type = type
+        self._distribution = distribution
+        self._version = version
+        self._architecture = architecture
 
-        self._check_not_none_str_value('id', self.id)
+        self._check_not_none_str_value('id', self._id)
 
     def _check_not_none_str_value(self, name, value):
         if value is None or not isinstance(value, six.string_types):
@@ -34,12 +34,12 @@ class ImageDetail(object):
         """Serialize the contents"""
 
         return {
-            "id": self.id,
-            "name": self.name,
-            "architecture": self.architecture,
-            "distribution": self.distribution,
-            "type": self.type,
-            "version": self.version,
+            "id": self._id,
+            "name": self._name,
+            "architecture": self._architecture,
+            "distribution": self._distribution,
+            "type": self._type,
+            "version": self._version,
         }
 
 
@@ -64,7 +64,7 @@ class ImageDetailMap(object):
     """
 
     def __init__(self, mapping=None):
-        self.mapping = mapping
+        self._mapping = mapping
 
     def get(self, id=None, name=None, version=None, type=None,
             architecture=None, distribution=None):
@@ -82,7 +82,7 @@ class ImageDetailMap(object):
             Returns: :py:class:`nflex_connector_utils.image_detail.ImageDetail`
         """
 
-        mapped_image = self.mapping.get(id)
+        mapped_image = self._mapping.get(id)
         if mapped_image is None:
             (mname, mtype, mdist, mversion, march) = tuple([None] * 5)
         else:

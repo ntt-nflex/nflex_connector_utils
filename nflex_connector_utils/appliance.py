@@ -12,7 +12,7 @@ class Appliance(Resource):
 
     def __init__(self, size_b=None, type_id=None, **kwargs):
         super(Appliance, self).__init__(type='appliance', **kwargs)
-        self.type_id = type_id
+        self._type_id = type_id
 
     def serialize(self):
         """Serialize the contents"""
@@ -20,7 +20,7 @@ class Appliance(Resource):
         data = super(Appliance, self).serialize()
         data['details'] = {
             self.type: {
-                "type_id": self.type_id
+                "type_id": self._type_id
             }
         }
         return data

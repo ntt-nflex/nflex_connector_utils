@@ -26,55 +26,55 @@ class Server(Resource):
                  instance_type=None, ip_addresses=None,
                  is_virtual=None, **kwargs):
         super(Server, self).__init__(type='server', **kwargs)
-        self.cpu_cores = cpu_cores
-        self.cpu_hz = cpu_hz
-        self.ram_b = ram_b
-        self.volumes_b = volumes_b
-        self.is_virtual = is_virtual
+        self._cpu_cores = cpu_cores
+        self._cpu_hz = cpu_hz
+        self._ram_b = ram_b
+        self._volumes_b = volumes_b
+        self._is_virtual = is_virtual
 
         if state is None:
             state = 'unknown'
-        self.state = state
+        self._state = state
 
         if provider_state is None:
             provider_state = 'unknown'
-        self.provider_state = provider_state
+        self._provider_state = provider_state
 
-        self.instance_type = instance_type
-        self.image_detail = image_detail
+        self._instance_type = instance_type
+        self._image_detail = image_detail
 
         if ip_addresses is None:
             ip_addresses = []
-        self.ip_addresses = ip_addresses
+        self._ip_addresses = ip_addresses
 
     def serialize(self):
         """Serialize the contents"""
 
         data = super(Server, self).serialize()
 
-        ip_addresses = [ip.serialize() for ip in self.ip_addresses]
+        ip_addresses = [ip.serialize() for ip in self._ip_addresses]
 
         data['details'] = {
             self.type: {
-                "cpu_cores": self.cpu_cores,
-                "cpu_hz": self.cpu_hz,
-                "ram_b": self.ram_b,
-                "volumes_b": self.volumes_b,
-                "instance_type": self.instance_type,
-                "state": self.state,
-                "provider_state": self.provider_state,
+                "cpu_cores": self._cpu_cores,
+                "cpu_hz": self._cpu_hz,
+                "ram_b": self._ram_b,
+                "volumes_b": self._volumes_b,
+                "instance_type": self._instance_type,
+                "state": self._state,
+                "provider_state": self._provider_state,
                 "ip_addresses": ip_addresses,
             }
         }
 
         type_details = data['details'][self.type]
 
-        if self.image_detail is not None:
-            type_details['image_detail'] = self.image_detail.serialize()
+        if self._image_detail is not None:
+            type_details['image_detail'] = self._image_detail.serialize()
         else:
             type_details['image_detail'] = None
 
-        if self.is_virtual is not None:
-            type_details['is_virtual'] = self.is_virtual
+        if self._is_virtual is not None:
+            type_details['is_virtual'] = self._is_virtual
 
         return data

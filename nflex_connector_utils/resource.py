@@ -30,17 +30,17 @@ class Resource(object):
         self._check_not_none_str_value('name', self.name)
         self._check_not_none_str_value('type', self.type)
 
-        self.provider_created_at = provider_created_at
+        self._provider_created_at = provider_created_at
 
         if connections is None:
             connections = Connections()
-        self.connections = connections
+        self._connections = connections
 
         if metadata is None:
             metadata = Metadata()
-        self.metadata = metadata
-        self.region = region
-        self.native_portal_link = native_portal_link
+        self._metadata = metadata
+        self._region = region
+        self._native_portal_link = native_portal_link
 
     def _check_not_none_str_value(self, name, value):
         if value is None or not isinstance(value, six.string_types):
@@ -49,11 +49,11 @@ class Resource(object):
     def serialize(self):
         """Serialize the contents"""
 
-        provider_created_at = convert_datetime(self.provider_created_at)
+        provider_created_at = convert_datetime(self._provider_created_at)
 
         regions = []
-        if self.region is not None:
-            regions = [self.region.serialize()]
+        if self._region is not None:
+            regions = [self._region.serialize()]
 
         results = {
             "id": self.id,
@@ -64,11 +64,11 @@ class Resource(object):
                 "provider_created_at": provider_created_at,
                 'last_seen_at': convert_datetime(datetime.utcnow()),
             },
-            "connections": self.connections.serialize(),
-            "metadata": self.metadata.serialize(),
+            "connections": self._connections.serialize(),
+            "metadata": self._metadata.serialize(),
         }
 
-        if self.native_portal_link is not None:
-            results['base']['native_portal_link'] = self.native_portal_link
+        if self._native_portal_link is not None:
+            results['base']['native_portal_link'] = self._native_portal_link
 
         return results

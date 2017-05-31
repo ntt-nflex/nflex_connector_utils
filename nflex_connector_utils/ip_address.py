@@ -10,21 +10,21 @@ class IpAddress(object):
     """  # noqa
 
     def __init__(self, ip_address=None, network_id=None, network_name=None):
-        self.ip_address = ip_address
-        self.network_id = network_id
-        self.network_name = network_name
+        self._ip_address = ip_address
+        self._network_id = network_id
+        self._network_name = network_name
 
     def serialize(self):
         """Serialize the contents"""
 
         results = {}
-        if self.ip_address is not None:
-            results['ip_address'] = self.ip_address
+        if self._ip_address is not None:
+            results['ip_address'] = self._ip_address
 
-        if self.network_id is not None and self.network_name is not None:
+        if self._network_id is not None and self._network_name is not None:
             results['network'] = {
-                'id': self.network_id,
-                'name': self.network_name,
+                'id': self._network_id,
+                'name': self._network_name,
             }
 
         return results

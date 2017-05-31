@@ -28,7 +28,7 @@ class Connections(object):
     """
     def __init__(self, type=None, connections=None, appliances=None,
                  servers=None, networks=None, volumes=None):
-        self.data = {}
+        self._data = {}
         self.add(type=type, connections=connections, appliances=appliances,
                  servers=servers, networks=networks, volumes=volumes)
 
@@ -36,10 +36,10 @@ class Connections(object):
         if connections is None or len(connections) == 0:
             return
 
-        if type_ not in self.data:
-            self.data[type_] = []
+        if type_ not in self._data:
+            self._data[type_] = []
 
-        type_data = self.data[type_]
+        type_data = self._data[type_]
         for id_ in connections:
             type_data.append({'id': id_})
 
@@ -73,4 +73,4 @@ class Connections(object):
     def serialize(self):
         """Serialize the contents"""
 
-        return self.data
+        return self._data

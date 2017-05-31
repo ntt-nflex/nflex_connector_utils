@@ -30,8 +30,8 @@ class Metadata(object):
     def __init__(self, values=None, default_namespace=None):
         if default_namespace is None:
             default_namespace = self.PROVIDER_SPECIFIC_NAMESPACE_ID
-        self.default_namespace = default_namespace
-        self.data = {}
+        self._default_namespace = default_namespace
+        self._data = {}
 
         if values is not None:
             for value in values:
@@ -54,13 +54,13 @@ class Metadata(object):
         """
 
         if namespace is None:
-            namespace = self.default_namespace
-        if namespace not in self.data:
-            self.data[namespace] = {}
-        self.data[namespace][key] = value
+            namespace = self._default_namespace
+        if namespace not in self._data:
+            self._data[namespace] = {}
+        self._data[namespace][key] = value
         return self
 
     def serialize(self):
         """Serialize the contents"""
 
-        return self.data
+        return self._data
