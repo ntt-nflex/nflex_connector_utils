@@ -3,6 +3,7 @@ DIRTY=$(shell python -c "import versioneer; print versioneer.get_versions()['dir
 all: doc package
 
 setup: devenv
+	. devenv/bin/activate && tools/git/setup_git_hooks.sh
 
 devenv:
 	tox -e devenv -v

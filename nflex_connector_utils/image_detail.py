@@ -13,7 +13,7 @@ class ImageDetail(object):
             version (str): version e.g. ``V2`` or ``16.04.1``
             architecture (str): architecture e.g ``i386``, ``x86_64``
 
-    """
+    """  # noqa
 
     def __init__(self, id=None, name=None, type=None, distribution=None,
                  version=None, architecture=None):
@@ -61,7 +61,7 @@ class ImageDetailMap(object):
                 m.get('no-match')                       # Returns an Image with None
                 m.get('ubuntu16')                       # Matches the image with "ubuntu16"
                 m.get('ubuntu16', architecture='i386')  # Matches the image with "ubuntu16" and overrides the architecture
-    """
+    """  # noqa
 
     def __init__(self, mapping=None):
         self._mapping = mapping
@@ -80,7 +80,7 @@ class ImageDetailMap(object):
                 architecture (str): optional architecture
 
             Returns: :py:class:`nflex_connector_utils.image_detail.ImageDetail`
-        """
+        """  # noqa
 
         mapped_image = self._mapping.get(id)
         if mapped_image is None:

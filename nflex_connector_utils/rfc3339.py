@@ -13,7 +13,7 @@ def convert_datetime(dt):
 
         Returns:
             str: A RFC 3339 timestamp
-    """
+    """  # noqa
 
     if dt is None or dt == '':
         return None

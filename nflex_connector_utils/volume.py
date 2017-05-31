@@ -11,7 +11,7 @@ class Volume(Resource):
             encrypted (bool): Optional, set to true if the volume is encrypted
             iops (int): Optional iops
             zone_name (str): Optional zone name
-    """
+    """  # noqa
 
     def __init__(self, size_b=None, encrypted=None, iops=None, zone_name=None,
                  **kwargs):

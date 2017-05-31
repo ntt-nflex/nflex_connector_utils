@@ -25,7 +25,8 @@ class Connections(object):
                 c.add(type='appliances', connections='appliance-1').add(servers=['server-1'])
                 c.add(networks=['network-1'])
 
-    """
+    """  # noqa
+
     def __init__(self, type=None, connections=None, appliances=None,
                  servers=None, networks=None, volumes=None):
         self._data = {}
@@ -58,7 +59,7 @@ class Connections(object):
 
             Returns:
                 :py:class:`nflex_connector_utils.connections.Connections`: returns itself, so that ``add`` methods can be chained
-        """
+        """  # noqa
 
         if type is not None and connections is not None:
             self._add_type(type, connections)

@@ -51,7 +51,7 @@ class Metadata(object):
 
         Returns:
             :py:class:`nflex_connector_utils.metadata.Metadata`: returns itself, so that ``add`` methods can be chained
-        """
+        """  # noqa
 
         if namespace is None:
             namespace = self._default_namespace
