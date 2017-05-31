@@ -18,7 +18,7 @@ clean-python:
 
 .PHONY : clean-package
 clean-package:
-	rm -rf non-git/nflex_connector_utils.egg-info dist nflex-connector-utils.egg-info
+	rm -rf non-git dist nflex_connector_utils.egg-info
 
 .PHONY: clean-docs
 clean-docs:
