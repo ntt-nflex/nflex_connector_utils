@@ -9,10 +9,12 @@ class IpAddress(object):
 
     """  # noqa
 
-    def __init__(self, ip_address=None, network_id=None, network_name=None):
+    def __init__(self, ip_address=None, network_id=None, network_name=None,
+                 description=None):
         self._ip_address = ip_address
         self._network_id = network_id
         self._network_name = network_name
+        self._description = description
 
     def serialize(self):
         """Serialize the contents"""
@@ -26,5 +28,8 @@ class IpAddress(object):
                 'id': self._network_id,
                 'name': self._network_name,
             }
+
+        if self._description is not None:
+            results['description'] = self._description
 
         return results
