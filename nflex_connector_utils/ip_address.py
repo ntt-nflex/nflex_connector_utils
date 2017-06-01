@@ -4,6 +4,7 @@ class IpAddress(object):
 
         Args:
             ip_address (str): IPv4 or IPv6 address
+            description (str): Description of the ip address. Useful when there is no network, e.g. if the IP address is public.
             network_id (str): Optional network id. This isn't used yet, but may be used in the future to associate an IP address with a network.
             network_name (str): Optional network name. This isn't used yet.
 
