@@ -9,6 +9,7 @@ from resource import Resource  # noqa
 from appliance import Appliance  # noqa
 from network import Network  # noqa
 from server import Server  # noqa
+from service_offering import ServiceOffering  # noqa
 from volume import Volume  # noqa
 from tools import serialize_list  # noqa
 
