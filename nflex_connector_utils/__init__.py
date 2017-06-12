@@ -10,7 +10,7 @@ from appliance import Appliance  # noqa
 from network import Network  # noqa
 from server import Server  # noqa
 from volume import Volume  # noqa
-from tools import serialize_list  # noqa
+from tools import serialize_list, vcr_cassette_context  # noqa
 
 from ._version import get_versions
 __version__ = get_versions()['version']
