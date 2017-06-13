@@ -3,7 +3,7 @@ from . import Resource
 
 class ServiceOffering(Resource):
     """
-        A representation of a server
+        A representation of a service offering
 
         Args:
             base (base): See :py:class:`nflex_connector_utils.resource.Resource` for common resource args.
