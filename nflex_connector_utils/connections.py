@@ -4,11 +4,12 @@ class Connections(object):
 
         Args:
             type (str): The type of resource to add connections to, e.g. ``server``
-            connections (str): When used together with ``type``, a list of associated resource ids
-            appliances (str): an optional list of appliance ids
-            servers (str): an optional list of server ids
-            networks (str): an optional list of network ids
-            volumes (str): an optional list of volume ids
+            connections (list): When used together with ``type``, a list of associated resource ids
+                                or dicts
+            appliances (list): an optional list of appliance ids
+            servers (list): an optional list of server ids
+            networks (list): an optional list of network ids
+            volumes (list): an optional list of volume ids
 
         Examples:
             Create a bunch of connections to a server::
@@ -42,7 +43,10 @@ class Connections(object):
 
         type_data = self._data[type_]
         for id_ in connections:
-            type_data.append({'id': id_})
+            if type_ == 'any':
+                type_data.append(id_)
+            else:
+                type_data.append({'id': id_})
 
     def add(self, type=None, connections=None, appliances=None, servers=None,
             networks=None, volumes=None):

@@ -16,12 +16,13 @@ class Resource(object):
             provider_created_at (str or datetime): An optional string or datetime object when the resource was created. This should never change.
             native_portal_link (str): An optional url to a page on a provider portal with details of the resource.
             region (:py:class:`nflex_connector_utils.locations.Region`): An optional :py:class:`nflex_connector_utils.locations.Region` object that associates the resource with a CMP location.
+            locations (:py:class:`nflex_connector_utils.locations.Locations`): An optional :py:class:`nflex_connector_utils.locations.Locations` objects that provides extended location information.
             connections (:py:class:`nflex_connector_utils.connections.Connections`)_: An optional :py:class:`nflex_connector_utils.connections.Connections` object
             metadata (:py:class:`nflex_connector_utils.metadata.Metadata`): An optional :py:class:`nflex_connector_utils.metadata.Metadata` object
 
     """  # noqa
     def __init__(self, id=None, name=None, type=None, region=None,
-                 provider_created_at=None, metadata=None,
+                 locations=None, provider_created_at=None, metadata=None,
                  native_portal_link=None, connections=None):
         self.id = id
         self.name = name
@@ -40,6 +41,7 @@ class Resource(object):
             metadata = Metadata()
         self._metadata = metadata
         self._region = region
+        self._locations = locations
         self._native_portal_link = native_portal_link
 
     def _check_not_none_str_value(self, name, value):
@@ -60,7 +62,6 @@ class Resource(object):
             "type": self.type,
             "base": {
                 "name": self.name,
-                "regions": regions,
                 "provider_created_at": provider_created_at,
                 'last_seen_at': convert_datetime(datetime.utcnow()),
             },
@@ -70,5 +71,16 @@ class Resource(object):
 
         if self._native_portal_link is not None:
             results['base']['native_portal_link'] = self._native_portal_link
+
+        locations = []
+        if self._locations is not None:
+            locations = self._locations.serialize()
+        if len(locations) > 0:
+            results['base']['locations'] = locations
+        else:
+            regions = []
+            if self._region is not None:
+                regions = [self._region.serialize()]
+            results['base']['regions'] = regions
 
         return results

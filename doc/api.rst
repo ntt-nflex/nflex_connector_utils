@@ -31,3 +31,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.account
    :members:
+.. automodule:: nflex_connector_utils.service_offering
+   :members:
