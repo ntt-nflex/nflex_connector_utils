@@ -4,7 +4,7 @@ from metadata import Metadata  # noqa
 from connections import Connections  # noqa
 from image_detail import ImageDetail, ImageDetailMap  # noqa
 from ip_address import IpAddress  # noqa
-from locations import Region  # noqa
+from locations import Region, Locations  # noqa
 from resource import Resource  # noqa
 from appliance import Appliance  # noqa
 from network import Network  # noqa

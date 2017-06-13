@@ -1,8 +1,8 @@
 import pytest
 
 from nflex_connector_utils import (
-    Resource, Appliance, Network, Server, Volume,
-    IpAddress, ImageDetail, Region, Connections, Metadata)
+    Resource, Appliance, Network, Server, ServiceOffering, Volume,
+    IpAddress, ImageDetail, Region, Locations, Connections, Metadata)
 
 
 class TestResources(object):
@@ -48,6 +48,10 @@ class TestResources(object):
 
         data = Resource(region=Region(id='foo'), **kwargs).serialize()
         assert len(data['base']['regions']) > 0
+
+        data = Resource(locations=Locations([{id: 'foo'}]), **kwargs). \
+            serialize()
+        assert len(data['base']['locations']) > 0
 
         data = Resource(connections=Connections(servers=['foo']),
                         **kwargs).serialize()
@@ -114,6 +118,13 @@ class TestResources(object):
             'volumes_b': 1 * 1024 * 1024 * 1024 * 1024,
             'is_virtual': False,
         }
+
+    def test_service_offering_details(self):
+        data = ServiceOffering(id='id', name='name').serialize()
+        assert data['details']['service_offering']['type_id'] is None
+
+        data = ServiceOffering(id='id', name='name', type_id='foo').serialize()
+        assert data['details']['service_offering']['type_id'] == 'foo'
 
     def test_volume_details(self):
         data = Volume(id='id', name='name').serialize()
