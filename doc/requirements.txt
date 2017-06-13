@@ -1,1 +1,8 @@
+# Note: all requirements in the main requirements.txt need to be here too
+datetime
+python-dateutil
+pytz
+six
+
+# For docs
 sphinxcontrib.napoleon
