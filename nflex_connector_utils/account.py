@@ -23,7 +23,7 @@ class Account(object):
         return results
 
     def update(self, api, account_id):
-        """Updates CMP(babel) account"""
+        """Updates CMP account"""
 
         if account_id is None:
             '''For testing purposes, if the event doesn't have an account_id,
@@ -35,5 +35,5 @@ class Account(object):
             data=self.serialize())
         if response.status_code != httplib.OK:
             raise Exception(
-                'Got bad response from babel account API: %d, %s' % (
+                'Got bad response from account API: %d, %s' % (
                     response.status_code, response.content))
