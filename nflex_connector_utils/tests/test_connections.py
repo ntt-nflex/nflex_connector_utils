@@ -11,6 +11,10 @@ class TestConnections(object):
         data = Connections(type='type', connections=['1', '2']).serialize()
         assert data == {'type': [{'id': '1'}, {'id': '2'}]}
 
+        # Test constructor with type any
+        data = Connections(type='any', connections=['1', '2']).serialize()
+        assert data == {'any': ['1', '2']}
+
         # Test constructor with named types
         named_types = {
             'appliances': ['a1', 'a2'],

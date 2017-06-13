@@ -44,7 +44,9 @@ class Locations(object):
             longitude (float) - optional
     """
 
-    def __init__(self, locations=[]):
+    def __init__(self, locations=None):
+        if locations is None:
+            raise ValueError('locations must be a list of location hashes')
         self._data = []
         for location in locations:
             for attr in ('location', 'city', 'state', 'country', 'region'):
