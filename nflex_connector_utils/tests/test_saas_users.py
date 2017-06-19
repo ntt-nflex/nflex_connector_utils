@@ -36,39 +36,3 @@ class TestSaasuser(object):
         assert data['details']['saas_user']['phone'] is '+4412345678'
         assert data['details']['saas_user']['disk_quota_b'] is '3663'
         assert data['details']['saas_user']['disk_used_b'] is '1287'
-
-
-
-
-
-
-
-    # def test_volume_details(self):
-    #     data = Volume(id='id', name='name').serialize()
-    #     assert 'volume' in data['details']
-    #     assert data['details']['volume']['iops'] is None
-    #     assert data['details']['volume']['encrypted'] is None
-    #     assert data['details']['volume']['size_b'] is None
-    #     assert 'zone_name' not in data['details']['volume']
-    #
-    #     # iops should be None or an int
-    #     data = Volume(id='id', name='name', iops=None).serialize()
-    #     assert data['details']['volume']['iops'] is None
-    #     data = Volume(id='id', name='name', iops=1).serialize()
-    #     assert data['details']['volume']['iops'] == 1
-    #     data = Volume(id='id', name='name', iops=1.5).serialize()
-    #     assert data['details']['volume']['iops'] == 1
-    #     data = Volume(id='id', name='name', iops="5").serialize()
-    #     assert data['details']['volume']['iops'] == 5
-    #
-    #     data = Volume(id='id', name='name', encrypted=True,
-    #                   size_b=10, zone_name='foo').serialize()
-    #     assert data['details']['volume']['encrypted'] is True
-    #     assert data['details']['volume']['size_b'] == 10
-    #     assert data['details']['volume']['zone_name'] == 'foo'
-    #
-
-
-
-
-# AssertionError: assert 'saas_users' in {'saas_user': {'address': None, 'avatar_url': None, 'disk_quota_b': None, '': None, ...}}
