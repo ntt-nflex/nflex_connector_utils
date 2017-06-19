@@ -19,15 +19,15 @@ class SaasUser(Resource):
 
     """  # noqa
 
-    def __init__(self, user_id=None, name=None, avatar_url=None, phone=None, address=None, language=None,
-                 metadata=None, is_active=None, disk_quota_b=None, disk_used_b=None):
-        self._user_id = user_id
-        self._name = name
+    def __init__(self, avatar_url=None, phone=None, address=None, language=None,
+                 is_active=None, disk_quota_b=None, disk_used_b=None, **kwargs):
+
+        super(SaasUser, self).__init__(type='saas_user', **kwargs)
+
         self._avatar_url = avatar_url
         self._phone = phone
         self._address = address
         self._language = language
-        self._metadata = metadata
         self._is_active = is_active
         self._disk_quota_b = disk_quota_b
         self._disk_used_b = disk_used_b
@@ -39,8 +39,6 @@ class SaasUser(Resource):
 
         data['details'] = {
             self.type: {
-                "user_id": self._user_id,
-                "name": self._name,
                 "avatar_url": self._avatar_url,
                 "phone": self._phone,
                 "address": self._address,
