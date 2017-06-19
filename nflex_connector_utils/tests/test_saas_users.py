@@ -3,7 +3,6 @@ from nflex_connector_utils import SaasUser
 
 class TestSaasuser(object):
 
-
     def test_saas_user(self):
         data = SaasUser(id='id', name='name').serialize()
         assert 'saas_user' in data['details']
