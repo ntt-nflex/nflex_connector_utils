@@ -1,5 +1,6 @@
 from . import Resource
 
+
 class SaasUser(Resource):
     """
         A representation of an Saas User
@@ -15,13 +16,13 @@ class SaasUser(Resource):
             is_active (Boolean): To check if the user is active or not
             disk_quota_b (str): The Storage allocated to the user
             disk_used_b (str): The Storage used by the user
-            
+
 
     """  # noqa
 
-    def __init__(self, avatar_url=None, phone=None, address=None, language=None,
-                 is_active=None, disk_quota_b=None, disk_used_b=None,
-                 email=None, country=None, **kwargs):
+    def __init__(self, avatar_url=None, phone=None, address=None,
+                 language=None, is_active=None, disk_quota_b=None,
+                 disk_used_b=None, email=None, country=None, **kwargs):
 
         super(SaasUser, self).__init__(type='saas_user', **kwargs)
 
