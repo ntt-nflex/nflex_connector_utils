@@ -20,7 +20,8 @@ class SaasUser(Resource):
     """  # noqa
 
     def __init__(self, avatar_url=None, phone=None, address=None, language=None,
-                 is_active=None, disk_quota_b=None, disk_used_b=None, **kwargs):
+                 is_active=None, disk_quota_b=None, disk_used_b=None,
+                 email=None, country=None, **kwargs):
 
         super(SaasUser, self).__init__(type='saas_user', **kwargs)
 
@@ -31,6 +32,8 @@ class SaasUser(Resource):
         self._is_active = is_active
         self._disk_quota_b = disk_quota_b
         self._disk_used_b = disk_used_b
+        self._email = email
+        self._country = country
 
     def serialize(self):
         """Serialize the contents"""
@@ -46,6 +49,8 @@ class SaasUser(Resource):
                 "is_active": self._is_active,
                 "disk_quota_b": self._disk_quota_b,
                 "disk_used_b": self._disk_used_b,
+                "email": self._email,
+                "country": self._country
             }
         }
 
