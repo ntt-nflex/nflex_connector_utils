@@ -2,7 +2,8 @@ import pytest
 
 from nflex_connector_utils import (
     Resource, Appliance, Network, Server, ServiceOffering, Volume,
-    IpAddress, ImageDetail, Region, Locations, Connections, Metadata)
+    IpAddress, ImageDetail, Region, Locations, Connections, Metadata,
+    ComputePool)
 
 
 class TestResources(object):
@@ -67,6 +68,30 @@ class TestResources(object):
 
         data = Appliance(id='id', name='name', type_id='foo').serialize()
         assert data['details']['appliance']['type_id'] == 'foo'
+
+    def test_compute_pool_details(self):
+        data = ComputePool(id='id', name='name').serialize()
+        assert data['details']['compute_pool'] == {
+            'cpu_hz': None,
+            'memory_b': None,
+            'storage_b': None,
+            'billing_tag': None
+        }
+
+        data = ComputePool(
+            id='id',
+            name='name',
+            cpu_hz=2000000,
+            memory_b=1024,
+            storage_b=1024,
+            billing_tag='something'
+        ).serialize()
+        assert data['details']['compute_pool'] == {
+            'cpu_hz': 2000000,
+            'memory_b': 1024,
+            'storage_b': 1024,
+            'billing_tag': 'something'
+        }
 
     def test_network_details(self):
         # There isn't much to test here

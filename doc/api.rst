@@ -33,3 +33,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.service_offering
    :members:
+.. automodule:: nflex_connector_utils.compute_pool
+   :members:
