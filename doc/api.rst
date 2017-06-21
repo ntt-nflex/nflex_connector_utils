@@ -37,3 +37,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.saas_users
    :members:
+.. automodule:: nflex_connector_utils.colo_space
+   :members:
