@@ -28,10 +28,9 @@ class Locations(object):
 
         Args:
             locations (list): list of location dicts with keys as specified
-            below:
-
-            location (dict): keys id, name, latitude, longitude - optional
-            city (dict): keys id, name, latitude, longitude - optional
+            belowx:
+            - location (dict): keys id, name, latitude, longitude - optional
+            - city (dict): keys id, name, latitude, longitude - optional
             state (dict): keys id, name, latitude, longitude - optional
             country (dict): keys id, name, latitude, longitude - optional
             region (dict): keys id, name, latitude, longitude - optional

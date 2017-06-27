@@ -35,5 +35,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.compute_pool
    :members:
-.. automodule:: nflex_connector_utils.saas_users
+.. automodule:: nflex_connector_utils.saas_user
    :members:
