@@ -41,6 +41,17 @@ Here is a full example of some nflex resource connector code::
                 # development team.
                 region=Region('region-1'),
 
+                # An example of a single location association
+                locations = Locations([{
+                    'country': {'name': 'France'},
+                    'city': {'name': 'Paris'},
+                    'location': {
+                        'name': 'Legendary Paris Place',
+                        'latitude': 48.860764,
+                        'longitude': 2.393646,
+                    }
+                }]),
+
                 native_portal_link='http://www.example.com/servers/server-2',
                 state='stopped',
                 provider_state='powered off',
