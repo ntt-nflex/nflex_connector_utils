@@ -3,7 +3,7 @@ import pytest
 from nflex_connector_utils import (
     Resource, Appliance, Network, Server, ServiceOffering, Volume,
     IpAddress, ImageDetail, Region, Locations, Connections, Metadata,
-    ComputePool)
+    ComputePool, ColoSpace)
 
 
 class TestResources(object):
@@ -174,3 +174,33 @@ class TestResources(object):
         assert data['details']['volume']['encrypted'] is True
         assert data['details']['volume']['size_b'] == 10
         assert data['details']['volume']['zone_name'] == 'foo'
+
+    def test_colo_space_details(self):
+        data = ColoSpace(id='id', name='name').serialize()
+        assert data['details']['colo_space'] == {
+            'power_allocation_w': None,
+            'type_id': None,
+            'colo_space_location': None,
+            'customer_label': None,
+            'customer_description': None,
+            'combination': None
+        }
+
+        data = ColoSpace(
+            id='id',
+            name='COLOSPACE',
+            power_allocation_w=42,
+            type_id='cab',
+            colo_space_location='Somewhere over the rainbow',
+            customer_label='Coley McColoface',
+            customer_description='Yet another Colo Space',
+            combination='Open Sesame'
+        ).serialize()
+        assert data['details']['colo_space'] == {
+            'power_allocation_w': 42,
+            'type_id': 'cab',
+            'colo_space_location': 'Somewhere over the rainbow',
+            'customer_label': 'Coley McColoface',
+            'customer_description': 'Yet another Colo Space',
+            'combination': 'Open Sesame'
+        }
