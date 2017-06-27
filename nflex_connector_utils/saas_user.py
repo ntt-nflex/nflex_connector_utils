@@ -6,13 +6,12 @@ class SaasUser(Resource):
         A representation of an Saas User
 
         Args:
+            base (base): See :py:class:`nflex_connector_utils.resource.Resource` for common resource args.
             user_id (str): Id of the Saas User
-            name (str): Name of the user
             avatar_url (str): Avatal URL of the user
             phone (str): Phone number of the user
             address (str): Address of the Saas User
             language (str): Preferred language of the user
-            metadata (str): Metadata of the user
             is_active (Boolean): To check if the user is active or not
             disk_quota_b (str): The Storage allocated to the user
             disk_used_b (str): The Storage used by the user
