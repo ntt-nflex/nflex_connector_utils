@@ -181,6 +181,7 @@ class TestResources(object):
             'power_allocation_w': None,
             'type_id': None,
             'colo_space_location': None,
+            'customer_name': None,
             'customer_label': None,
             'customer_description': None,
             'combination': None
@@ -192,6 +193,7 @@ class TestResources(object):
             power_allocation_w=42,
             type_id='cab',
             colo_space_location='Somewhere over the rainbow',
+            customer_name='The Original Colo Space',
             customer_label='Coley McColoface',
             customer_description='Yet another Colo Space',
             combination='Open Sesame'
@@ -200,6 +202,7 @@ class TestResources(object):
             'power_allocation_w': 42,
             'type_id': 'cab',
             'colo_space_location': 'Somewhere over the rainbow',
+            'customer_name': 'The Original Colo Space',
             'customer_label': 'Coley McColoface',
             'customer_description': 'Yet another Colo Space',
             'combination': 'Open Sesame'
