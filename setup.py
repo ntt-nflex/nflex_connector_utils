@@ -5,9 +5,7 @@ from setuptools import setup, find_packages
 
 requirements = parse_requirements('requirements.txt', session=uuid.uuid1())
 install_requires = [str(r.req) for r in requirements]
-description = """
-    nflex-connector-utils provides a suite of tools to produce data
-    structures when implementing resources connector nflex modules."""
+description = """nflex-connector-utils provides a suite of tools to produce data structures when implementing resources connector nflex modules."""  # noqa
 
 long_description = """
 nflex-connector-utils provides a suite of tools to produce data structures
