@@ -51,4 +51,4 @@ package: clean-package
 .PHONY : upload
 upload:
 	@test -z "$$(git status --short)" || (echo branch is not clean && git status --short && false)
-	python setup.py sdist upload -r https://pypi.python.org/pypi
+	python setup.py sdist upload -r https://upload.pypi.org/legacy/
