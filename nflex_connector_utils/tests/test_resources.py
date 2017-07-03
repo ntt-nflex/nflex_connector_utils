@@ -169,10 +169,12 @@ class TestResources(object):
         data = Volume(id='id', name='name', iops="5").serialize()
         assert data['details']['volume']['iops'] == 5
 
-        data = Volume(id='id', name='name', encrypted=True,
-                      size_b=10, zone_name='foo').serialize()
+        volume = Volume(id='id', name='name', encrypted=True,
+                        size_b=10, zone_name='foo')
+        data = volume.serialize()
         assert data['details']['volume']['encrypted'] is True
         assert data['details']['volume']['size_b'] == 10
+        assert volume.size_b == 10
         assert data['details']['volume']['zone_name'] == 'foo'
 
     def test_colo_space_details(self):

@@ -21,6 +21,11 @@ class Volume(Resource):
         self._iops = iops
         self._zone_name = zone_name
 
+    @property
+    def size_b(self):
+        '''Size in bytes'''
+        return self._size_b
+
     def serialize(self):
         """Serialize the contents"""
 
