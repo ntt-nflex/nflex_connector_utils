@@ -39,3 +39,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.colo_space
    :members:
+.. automodule:: nflex_connector_utils.circuit
+   :members:
