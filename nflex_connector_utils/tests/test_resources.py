@@ -215,6 +215,7 @@ class TestResources(object):
         assert data['details']['circuit'] == {
             'type_id': None,
             'carrier': None,
+            'reference': None,
             'endpoint_a': None,
             'endpoint_b': None,
         }
@@ -224,12 +225,14 @@ class TestResources(object):
             name='circuit',
             type_id='pvc',
             carrier='test',
+            reference='test',
             endpoint_a='test_endpoint_a',
             endpoint_b='test_endpoint_b'
         ).serialize()
         assert data['details']['circuit'] == {
             'type_id': 'pvc',
             'carrier': 'test',
+            'reference': 'test',
             'endpoint_a': 'test_endpoint_a',
             'endpoint_b': 'test_endpoint_b'
         }
