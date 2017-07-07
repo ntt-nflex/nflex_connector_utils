@@ -3,7 +3,7 @@ import pytest
 from nflex_connector_utils import (
     Resource, Appliance, Network, Server, ServiceOffering, Volume,
     IpAddress, ImageDetail, Region, Locations, Connections, Metadata,
-    ComputePool, ColoSpace)
+    ComputePool, ColoSpace, Circuit)
 
 
 class TestResources(object):
@@ -208,4 +208,31 @@ class TestResources(object):
             'customer_label': 'Coley McColoface',
             'customer_description': 'Yet another Colo Space',
             'combination': 'Open Sesame'
+        }
+
+    def test_circuit_details(self):
+        data = Circuit(id='id', name='name').serialize()
+        assert data['details']['circuit'] == {
+            'type_id': None,
+            'carrier': None,
+            'reference': None,
+            'endpoint_a': None,
+            'endpoint_b': None,
+        }
+
+        data = Circuit(
+            id='id',
+            name='circuit',
+            type_id='pvc',
+            carrier='test',
+            reference='test',
+            endpoint_a='test_endpoint_a',
+            endpoint_b='test_endpoint_b'
+        ).serialize()
+        assert data['details']['circuit'] == {
+            'type_id': 'pvc',
+            'carrier': 'test',
+            'reference': 'test',
+            'endpoint_a': 'test_endpoint_a',
+            'endpoint_b': 'test_endpoint_b'
         }
