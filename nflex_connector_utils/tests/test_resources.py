@@ -75,7 +75,6 @@ class TestResources(object):
             'cpu_hz': None,
             'memory_b': None,
             'storage_b': None,
-            'billing_tag': None
         }
 
         data = ComputePool(

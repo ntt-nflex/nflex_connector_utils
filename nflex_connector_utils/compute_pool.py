@@ -25,12 +25,16 @@ class ComputePool(Resource):
         """Serialize the contents"""
 
         data = super(ComputePool, self).serialize()
-        data['details'] = {
+        details = {
             self.type: {
                 "cpu_hz": self._cpu_hz,
                 "memory_b": self._memory_b,
                 "storage_b": self._storage_b,
-                "billing_tag": self._billing_tag
             }
         }
+
+        if self._billing_tag is not None:
+            details[self.type]['billing_tag'] = self._billing_tag
+
+        data['details'] = details
         return data
