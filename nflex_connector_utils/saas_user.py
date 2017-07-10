@@ -49,7 +49,8 @@ class SaasUser(Resource):
                 "disk_quota_b": self._disk_quota_b,
                 "disk_used_b": self._disk_used_b,
                 "email": self._email,
-                "country": self._country
+                "country": self._country,
+                "language": self._language,
             }
         }
 
