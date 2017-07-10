@@ -45,7 +45,6 @@ class SaasUser(Resource):
                 "avatar_url": self._avatar_url,
                 "phone": self._phone,
                 "address": self._address,
-                "metadata": self._metadata,
                 "is_active": self._is_active,
                 "disk_quota_b": self._disk_quota_b,
                 "disk_used_b": self._disk_used_b,
