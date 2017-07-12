@@ -29,9 +29,11 @@ class TestSaasuser(object):
 
         data = SaasUser(id='id', name='name', avatar_url='www.testurl.com',
                         phone='+4412345678', address='USA',
-                        disk_quota_b='3663', disk_used_b='1287').serialize()
+                        disk_quota_b='3663', disk_used_b='1287',
+                        language='en_GB').serialize()
         assert data['details']['saas_user']['avatar_url'] is 'www.testurl.com'
         assert data['details']['saas_user']['address'] is 'USA'
         assert data['details']['saas_user']['phone'] is '+4412345678'
         assert data['details']['saas_user']['disk_quota_b'] is '3663'
         assert data['details']['saas_user']['disk_used_b'] is '1287'
+        assert data['details']['saas_user']['language'] is 'en_GB'
