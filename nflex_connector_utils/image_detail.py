@@ -83,6 +83,8 @@ class ImageDetailMap(object):
         """  # noqa
 
         mapped_image = self._mapping.get(id)
+        if id is None:
+            raise ValueError("id must be a string and have a value")
         if mapped_image is None:
             (mname, mtype, mdist, mversion, march) = tuple([None] * 5)
         else:
