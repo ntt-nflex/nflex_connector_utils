@@ -39,7 +39,7 @@ class Resource(object):
             metadata = Metadata()
         self._metadata = metadata
         self.region = region
-        self._locations = locations
+        self.locations = locations
         self._native_portal_link = native_portal_link
 
     def _check_not_none_str_value(self, name, value):
@@ -73,8 +73,8 @@ class Resource(object):
             results['base']['native_portal_link'] = self._native_portal_link
 
         locations = []
-        if self._locations is not None:
-            locations = self._locations.serialize()
+        if self.locations is not None:
+            locations = self.locations.serialize()
         if len(locations) > 0:
             results['base']['locations'] = locations
         else:
