@@ -37,7 +37,7 @@ class Resource(object):
 
         if metadata is None:
             metadata = Metadata()
-        self._metadata = metadata
+        self.metadata = metadata
         self.region = region
         self.locations = locations
         self._native_portal_link = native_portal_link
@@ -66,7 +66,7 @@ class Resource(object):
                 'last_seen_at': convert_datetime(datetime.utcnow()),
             },
             "connections": connections.serialize(),
-            "metadata": self._metadata.serialize(),
+            "metadata": self.metadata.serialize(),
         }
 
         if self._native_portal_link is not None:
