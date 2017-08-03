@@ -38,7 +38,7 @@ class Resource(object):
         if metadata is None:
             metadata = Metadata()
         self._metadata = metadata
-        self._region = region
+        self.region = region
         self._locations = locations
         self._native_portal_link = native_portal_link
 
@@ -52,8 +52,8 @@ class Resource(object):
         provider_created_at = convert_datetime(self._provider_created_at)
 
         regions = []
-        if self._region is not None:
-            regions = [self._region.serialize()]
+        if self.region is not None:
+            regions = [self.region.serialize()]
 
         connections = self.connections or Connections()
 
@@ -79,8 +79,8 @@ class Resource(object):
             results['base']['locations'] = locations
         else:
             regions = []
-            if self._region is not None:
-                regions = [self._region.serialize()]
+            if self.region is not None:
+                regions = [self.region.serialize()]
             results['base']['regions'] = regions
 
         return results
