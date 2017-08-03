@@ -33,9 +33,7 @@ class Resource(object):
 
         self._provider_created_at = provider_created_at
 
-        if connections is None:
-            connections = Connections()
-        self._connections = connections
+        self.connections = connections
 
         if metadata is None:
             metadata = Metadata()
@@ -57,6 +55,8 @@ class Resource(object):
         if self._region is not None:
             regions = [self._region.serialize()]
 
+        connections = self.connections or Connections()
+
         results = {
             "id": self.id,
             "type": self.type,
@@ -65,7 +65,7 @@ class Resource(object):
                 "provider_created_at": provider_created_at,
                 'last_seen_at': convert_datetime(datetime.utcnow()),
             },
-            "connections": self._connections.serialize(),
+            "connections": connections.serialize(),
             "metadata": self._metadata.serialize(),
         }
 
