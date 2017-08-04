@@ -35,9 +35,13 @@ class Metadata(object):
 
         if values is not None:
             for value in values:
+                # Silently ignore anything other than 2 or 3 element tuples
+                if type(value) != tuple:
+                    continue
+
                 if len(value) == 2:
                     self.add(value[0], value[1])
-                else:
+                elif len(value) == 3:
                     self.add(value[1], value[2], namespace=value[0])
 
     def add(self, key, value, namespace=None):
