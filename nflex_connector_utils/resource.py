@@ -31,7 +31,7 @@ class Resource(object):
         self._check_not_none_str_value('name', self.name)
         self._check_not_none_str_value('type', self.type)
 
-        self._provider_created_at = provider_created_at
+        self.provider_created_at = provider_created_at
 
         self.connections = connections
 
@@ -49,7 +49,7 @@ class Resource(object):
     def serialize(self):
         """Serialize the contents"""
 
-        provider_created_at = convert_datetime(self._provider_created_at)
+        provider_created_at = convert_datetime(self.provider_created_at)
 
         regions = []
         if self.region is not None:
