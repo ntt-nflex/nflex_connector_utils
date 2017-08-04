@@ -30,7 +30,7 @@ class Server(Resource):
         self._cpu_hz = cpu_hz
         self._ram_b = ram_b
         self._volumes_b = volumes_b
-        self._is_virtual = is_virtual
+        self.is_virtual = is_virtual
 
         if state is None:
             state = 'unknown'
@@ -74,7 +74,7 @@ class Server(Resource):
         else:
             type_details['image_detail'] = None
 
-        if self._is_virtual is not None:
-            type_details['is_virtual'] = self._is_virtual
+        if self.is_virtual is not None:
+            type_details['is_virtual'] = self.is_virtual
 
         return data
