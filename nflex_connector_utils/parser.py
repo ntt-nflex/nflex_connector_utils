@@ -20,6 +20,21 @@ import logging
 import operator
 
 
+_CONVERSION_KEY = 'conversion_expr'
+
+
+def parse_mapping(mapping):
+    parser = SimpleExpressionParser()
+
+    for item in mapping.values():
+            if _CONVERSION_KEY in item:
+                item[_CONVERSION_KEY] = parser.parse(
+                    item[_CONVERSION_KEY]
+                )
+
+    return mapping
+
+
 class ExpressionParser(object):
     """Takes care of parsing simple math expressions with variables"""
     def __init__(self):
