@@ -1,6 +1,6 @@
 from parser import SimpleExpressionParser
 
-AZURE = {
+_AZURE = {
     '\\Memory\\UsedMemory': {
         'name': 'memory-in-use',
         'unit': 'B',
@@ -392,7 +392,7 @@ AZURE = {
     },
 }
 
-AWS = {
+_AWS = {
     'CPUUtilization': {
         'name': 'cpu-usage',
         'unit': 'percent',
@@ -446,7 +446,7 @@ AWS = {
     },
 }
 
-CLOUDSTACK = {
+_CLOUDSTACK = {
     'CPUUtilization': {
         'name': 'cpu-usage',
         'unit': 'percent',
@@ -492,7 +492,7 @@ CLOUDSTACK = {
     }
 }
 
-DIMENSION_DATA = {
+_DIMENSION_DATA = {
     'Actual Usage (%)': {
         'name': 'cpu-usage',
         'unit': 'percent',
@@ -615,7 +615,7 @@ DIMENSION_DATA = {
     },
 }
 
-VSPHERE = {
+_VSPHERE = {
     'cpu.usage.average': {
         'name': 'cpu-usage',
         'unit': 'percent',
@@ -657,7 +657,7 @@ VSPHERE = {
     },
 }
 
-EC2 = {
+_EC2 = {
     'nova.cpu.utilization.percents': {
         'name': 'cpu-usage',
         'unit': 'percent',
@@ -729,203 +729,7 @@ EC2 = {
     },
 }
 
-EC = {
-    'nexus_nc_icmp': {
-        'min_rtt': {'name': 'nexus-nc-icmp-min-rtt', 'unit': 's'},
-        'average_rtt': {'name': 'nexus-nc-icmp-average-rtt', 'unit': 's'},
-        'max_rtt': {'name': 'nexus-nc-icmp-max-rtt', 'unit': 's'},
-        'total_time': {'name': 'nexus-nc-icmp-total-time', 'unit': 's'},
-    },
-    'unix_performance': {
-        'load1': {'name': 'load-avg-1'},
-        'load5': {'name': 'load-avg-5'},
-        'load15': {'name': 'load-avg-15'},
-        'avail_memory': None,
-        'total_memory': None,
-        'avail_swap': {
-            'name': 'memory-swap',
-            'unit': 'percent',
-            'conversion_expr': '100 * (1 - avail_swap / total_swap)'
-        },
-        'total_swap': None,
-        'cpu_user_ticks': {
-            'name': 'cpu-usage-user',
-            'unit': 'percent',
-            'conversion_expr': ('100 * cpu_user_ticks / (cpu_user_ticks + '
-                                'cpu_system_ticks + cpu_idle_ticks)')
-        },
-        'cpu_system_ticks': {
-            'name': 'cpu-usage-system',
-            'unit': 'percent',
-            'conversion_expr': ('100 * cpu_system_ticks / (cpu_user_ticks + '
-                                'cpu_system_ticks + cpu_idle_ticks)')
-        },
-        'cpu_idle_ticks': {
-            'name': 'cpu-usage',
-            'unit': 'percent',
-            'conversion_expr': ('100 * (cpu_user_ticks + cpu_system_ticks) / '
-                                '(cpu_user_ticks + cpu_system_ticks + '
-                                'cpu_idle_ticks)')
-        }
-    },
-
-    'unix_disks_v2': {
-        'used': {
-            'name': 'disk-usage',
-            'unit': 'percent',
-            'conversion_expr': 'used / (used + avail) * 100',
-        },
-        'avail': None,
-        'size': None,
-    },
-
-    'xt_gcv_vm_network_io': {
-        'bytes_received': {'name': 'network-in', 'unit': 'B/s'},
-        'bytes_transmitted': {'name': 'network-out', 'unit': 'B/s'},
-    },
-
-    'xt_gcv_vm_performance': {
-        'cpu_usage': {'name': 'cpu-usage', 'unit': 'percent'},
-        'disk_usage': {'name': 'disk-io', 'unit': 'B/s'},
-        'memory_usage': {'name': 'memory-usage', 'unit': 'percent'},
-        'memory_swapin_rate': {'name': 'memory-pagein', 'unit': 'B/s'},
-        'memory_swapout_rate': {'name': 'memory-pageout', 'unit': 'B/s'},
-        'cpu_swapwait_time': None,
-        'memory_balloon': None,
-        'memory_consumed': None,
-        'time_since_reboot': None
-    },
-
-    'xt_icmp': {
-        'average_rtt': {'name': 'icmp-average-rtt', 'unit': 's'},
-        'max_rtt': {'name': 'icmp-max-rtt', 'unit': 's'},
-        'min_rtt': {'name': 'icmp-min-rtt', 'unit': 's'},
-        'respond_percent': {'name': 'icmp-response', 'unit': 'percent'},
-        'lookup_time': None,
-        'result_string total_time': None
-    },
-
-    'xt_gcv_compute_pool_memory': {
-        'memory_consumed': {'name': 'memory-in-use', 'unit': 'B'},
-        'memory_burst': {'name': 'memory-burst', 'unit': 'B'},
-        'memory_purchased': {'name': 'memory-purchased', 'unit': 'B'},
-        'cpu_usage_mhz': {
-            'name': 'cpu-in-use',
-            'unit': 'Hz',
-            'conversion_expr': 'cpu_usage_mhz * 1000 * 1000'
-        },
-        'cpu_mhz_burst': {
-            'name': 'cpu-burst',
-            'unit': 'Hz',
-            'conversion_expr': 'cpu_mhz_burst * 1000 * 1000'
-        },
-        'cpu_mhz_purchased': {
-            'name': 'cpu-purchased',
-            'unit': 'Hz',
-            'conversion_expr': 'cpu_mhz_purchased * 1000 * 1000'
-        },
-    },
-
-    'xt_gcv_compute_pool_storage': {
-        'storage_used': {'name': 'storage-in-use', 'unit': 'B'},
-        'storage_allocated': {'name': 'storage-allocated', 'unit': 'B'}
-    },
-
-    'cisco_cpu_and_memory': {
-        'cpu_percent_busy_5min': {'name': 'cpu-usage', 'unit': 'percent'},
-        'processor_memory_avail': {
-            'name': 'memory-usage',
-            'unit': 'percent',
-            'conversion_expr': ('100 * processor_memory_avail/'
-                                '(processor_memory_avail+'
-                                'processor_memory_used)')
-        },
-        'processor_memory_used': None,
-    },
-
-    'xt_am_snmp_catalyst_sw_fans': {
-        'fan_status': {'name': 'fan-status'},
-    },
-
-    'xt_am_snmp_catalyst_sw_psu':  {
-        'psu_status': {'name': 'psu-status'},
-    },
-
-    'xt_am_snmp_catalyst_switch_temp2': {
-        'sensor_status': {'name': 'sensor-status'},
-        'sensor_temp': {'name': 'sensor-temperature'},
-    },
-
-    'xt_network_interface_io': {
-        'in_octets': {'name': 'network-in', 'unit': 'B/s'},
-        'out_octets': {'name': 'network-out', 'unit': 'B/s'},
-        'in_unicast_packets': {'name': 'network-in-unicast-packets',
-                               'unit': 'packets/s'},
-        'out_unicast_packets': {'name': 'network-out-unicast-packets',
-                                'unit': 'packets/s'},
-        'in_multicast_packets': {'name': 'network-in-multicast-packets',
-                                 'unit': 'packets/s'},
-        'out_multicast_packets': {'name': 'network-out-multicast-packets',
-                                  'unit': 'packets/s'},
-        'in_broadcast_packets': {'name': 'network-in-broadcast-packets',
-                                 'unit': 'packets/s'},
-        'out_broadcast_packets': {'name': 'network-out-broadcast-packets',
-                                  'unit': 'packets/s'},
-        'in_errors': {'name': 'network-in-errors',
-                      'unit': 'packets/s'},
-        'out_errors': {'name': 'network-out-errors',
-                       'unit': 'packets/s'},
-        'in_discards': {'name': 'network-in-discards',
-                        'unit': 'packets/s'},
-        'out_discards': {'name': 'network-out-discards',
-                         'unit': 'packets/s'},
-        'if_speed': {
-            'name': 'network-speed',
-            'unit': 'B/s',
-            'conversion_expr': 'if_speed / 8'
-        },
-        'alignment_errors': {
-            #  hijack this unused key for new percentage field
-            'name': 'network-in-percent',
-            'unit': 'percent',
-            'conversion_expr': '800 * in_octets / if_speed'
-        },
-        'fcs_errors': {
-            #  hijack this unused key for new percentage field
-            'name': 'network-out-percent',
-            'unit': 'percent',
-            'conversion_expr': '800 * out_octets / if_speed'
-        },
-        'oper_status': {'name': 'network-operational-status'},
-    },
-    'tcp': None,
-    'xt_ping': None,
-    'nexus_nc_https': None,
-    'xt_gcv_ina_performance': None,
-    'ext_switch_bandwidth': None,
-    'xt_netapp_aggregates': None,  # per-elapsed fnames and no sample_period
-    'xt_netapp_volumes': None,  # per-elapsed fnames and no sample_period
-    'anyoid': None,
-}
-
-EC['xt_interface_bandwidth'] = EC['xt_network_interface_io']
-
-EC['nexus_vmware_vm_performance'] = dict(EC['xt_gcv_vm_performance'])
-EC['nexus_vmware_vm_performance'].update({'peak_sample_period': None,
-                                          'cpu_guaranteed': None,
-                                          'memory_swapped': None})
-
-EC['nexus_vmware_vm_network_io'] = dict(EC['xt_gcv_vm_network_io'])
-EC['nexus_vmware_vm_network_io'].update({'packets_received': None,
-                                         'packets_transmitted': None,
-                                         'peak_bytes_received_rate': None,
-                                         'peak_bytes_transmitted_rate': None,
-                                         'peak_packets_received_rate': None,
-                                         'peak_packets_transmitted_rate': None,
-                                         'peak_sample_period': None,
-                                         })
-
-VIRTELA = {
+_VIRTELA = {
     'utilizationIn': {
         'name': 'network-in',
         'unit': 'B/s',
@@ -939,10 +743,7 @@ VIRTELA = {
 
 }
 
-IPCENTER = {
-    # 'Ping.rtt': {
-    #     'name': 'icmp-average-rtt'
-    # },
+_IPCENTER = {
     'Port 80 check.response': {
         'name': 'port-80-response'
     },
@@ -1062,7 +863,7 @@ IPCENTER = {
     }
 }
 
-SIMPLICLOUD = {
+_SIMPLICLOUD = {
     'devices-%s-graph-cpu': {
         'name': 'cpu-usage',
         'unit': 'percent'
@@ -1083,7 +884,7 @@ SIMPLICLOUD = {
     }
 }
 
-OPENSTACK = {
+_OPENSTACK = {
     'disk.write.bytes.rate': {
         'name': 'disk-writes',
         'unit': 'B/s',
@@ -1164,20 +965,18 @@ OPENSTACK = {
 }
 
 _MAPPINGS = {
-    'aws': AWS,
-    'azure': AZURE,
-    'enterprise_cloud': EC,
-    'dimension-data': DIMENSION_DATA,
-    'ntt-ecl2': EC2,
-    'cloudstack': CLOUDSTACK,
-    'vsphere': VSPHERE,
-    'virtela-view': VIRTELA,
-    'ntt-ipcenter': IPCENTER,
-    'openstack':  OPENSTACK,
-    'fake': {},  # we need this because there is no entry in Etcd for fake
-    # provider and lookup will fail
+    'aws': _AWS,
+    'azure': _AZURE,
+    'dimension-data': _DIMENSION_DATA,
+    'ntt-ecl2': _EC2,
+    'cloudstack': _CLOUDSTACK,
+    'vsphere': _VSPHERE,
+    'virtela-view': _VIRTELA,
+    'ntt-ipcenter': _IPCENTER,
+    'openstack':  _OPENSTACK,
+    'fake': {},
     'ntt-training': {},
-    'simplicloud': SIMPLICLOUD
+    'simplicloud': _SIMPLICLOUD
 }
 
 _CONVERSION_KEY = 'conversion_expr'
@@ -1185,13 +984,13 @@ _CONVERSION_KEY = 'conversion_expr'
 
 class Provisioner(object):
 
-    def __init__(self, provider):
-        if provider not in _MAPPINGS:
+    def __init__(self, provider, mappings=_MAPPINGS):
+        if provider not in mappings:
             raise KeyError(
                 'Provider not support in current mapping. '
-                'Please choose one of the following: %s' % _MAPPINGS.keys()
+                'Please choose one of the following: %s' % mappings.keys()
             )
-        self._mapping = _MAPPINGS[provider]
+        self._mapping = mappings[provider]
         self._parser = SimpleExpressionParser()
 
     def parse(self):

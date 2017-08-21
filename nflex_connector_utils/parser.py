@@ -16,6 +16,7 @@ from pyparsing import (  # noqa
     oneOf,
     opAssoc,
 )
+import logging
 import operator
 
 
@@ -45,7 +46,7 @@ class ExpressionParser(object):
             return self.pattern.parseString(expression)[0]
 
         except ParseException as e:
-            raise e
+            logging.warn('Failed to parse "%s": %s' % (expression, e))
 
         return None
 
@@ -112,17 +113,6 @@ class CaseExpressionParser(TernaryExpressionParser):
             END
         ).setParseAction(CaseStatement)
         self.pattern = self.CASE_EXPR + StringEnd()
-
-
-class Parser(CaseExpressionParser):
-    """Takes care of parsing (nested) SQL CASE statements, python ternary
-    expressions and simple math expressions with variables
-    """
-    def __init__(self):
-        super(self.__class__, self).__init__()
-        self.pattern = (self.CASE_EXPR |
-                        self.TERNARY_EXPR |
-                        self.ARITH_EXPR) + StringEnd()
 
 
 class SimpleExpressionParser(CaseExpressionParser):
