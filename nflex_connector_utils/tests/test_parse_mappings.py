@@ -2,7 +2,7 @@ import nflex_connector_utils.parser as parser
 from unittest import TestCase
 
 
-class TestProvisioner(TestCase):
+class TestParseMappings(TestCase):
     @classmethod
     def setUpClass(cls):
         cls.mappings = {
