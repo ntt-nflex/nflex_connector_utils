@@ -23,16 +23,54 @@ import operator
 _CONVERSION_KEY = 'conversion_expr'
 
 
-def parse_mapping(mapping):
+def parse_mappings(mappings):
+    """
+    Parses through a selection of metric definition mappings
+    using SimpleExpressionParser.
+    Looks for conversion_expr in each metric definition and runs
+    the logic on that field per evaluate mechanism.
+
+    Args:
+        mappings (dict): metric definition mappings
+
+    Examples:
+        Setup mappings::
+
+            mappings = {
+                'definition1': {
+                    'name': 'definition1',
+                    'conversion_expr': 'value * 10'
+                }
+            }
+
+        Get original value::
+
+            metric_value = 10
+
+        Parse the mappings::
+
+            parsed_mappings = parse_mappings(mappings)
+
+        Evaluate metric definition based on initial value::
+
+            parsed_metric_definition = parsed_mappings['definition1']
+            if 'conversion_expr' in parsed_metric_definition:
+                # 10 * 10 = 100
+                parsed_metric_value = parsed_metric_definition['
+                'conversion_expr'].evaluate({
+                    "value": metric_value
+                })
+
+    """  # noqa
     parser = SimpleExpressionParser()
 
-    for item in mapping.values():
+    for item in mappings.values():
             if _CONVERSION_KEY in item:
                 item[_CONVERSION_KEY] = parser.parse(
                     item[_CONVERSION_KEY]
                 )
 
-    return mapping
+    return mappings
 
 
 class ExpressionParser(object):

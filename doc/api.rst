@@ -41,3 +41,7 @@ API
    :members:
 .. automodule:: nflex_connector_utils.circuit
    :members:
+.. automodule:: nflex_connector_utils.parser
+   :members:
+.. automodule:: nflex_connector_utils.logger
+   :members:
