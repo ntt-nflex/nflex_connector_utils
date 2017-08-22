@@ -1,4 +1,4 @@
-import nflex_connector_utils.parser as parser
+from nflex_connector_utils.parser import parse_mappings
 from unittest import TestCase
 
 
@@ -31,7 +31,7 @@ class TestParseMappings(TestCase):
         return mapping.evaluate({'value': value})
 
     def test_conversion_expr(self):
-        parsed_mappings = parser.parse_mapping(self.mappings)
+        parsed_mappings = parse_mappings(self.mappings)
 
         self.assertEqual(
             self._evaluate_value(
