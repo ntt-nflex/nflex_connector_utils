@@ -35,6 +35,7 @@ def parse_mappings(mappings):
 
     Examples:
         Setup mappings::
+
             mappings = {
                 'definition1': {
                     'name': 'definition1',
@@ -43,12 +44,15 @@ def parse_mappings(mappings):
             }
 
         Get original value::
+
             metric_value = 10
 
         Parse the mappings::
+
             parsed_mappings = parse_mappings(mappings)
 
         Evaluate metric definition based on initial value::
+
             parsed_metric_definition = parsed_mappings['definition1']
             if 'conversion_expr' in parsed_metric_definition:
                 # 10 * 10 = 100
@@ -57,7 +61,7 @@ def parse_mappings(mappings):
                     "value": metric_value
                 })
 
-    """
+    """  # noqa
     parser = SimpleExpressionParser()
 
     for item in mappings.values():

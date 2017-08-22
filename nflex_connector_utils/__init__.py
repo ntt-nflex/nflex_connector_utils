@@ -17,6 +17,7 @@ from saas_user import SaasUser  # noqa
 from tools import serialize_list, vcr_cassette_context  # noqa
 from colo_space import ColoSpace  # noqa
 from circuit import Circuit  # noqa
+from parser import parse_mappings, VariableLookupError  # noqa
 
 from ._version import get_versions
 __version__ = get_versions()['version']
