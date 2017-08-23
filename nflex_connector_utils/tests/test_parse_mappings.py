@@ -1,67 +1,44 @@
-from nflex_connector_utils.parser import parse_mappings
+from nflex_connector_utils.parser import load_metric_mapping
 from unittest import TestCase
 
 
 class TestParseMappings(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.mappings = {
-            'metric1': {
-                        'name': 'metric1',
-                        'conversion_expr': 'value * 10'
-            },
-            'metric2': {
-                'name': 'metric2',
-                'conversion_expr': 'value / 10'
-            },
-            'metric3': {
-                'name': 'metric3',
-                'conversion_expr': 'value + 10'
-            },
-            'metric4': {
-                'name': 'metric4',
-                'conversion_expr': 'value - 10'
-            },
-            'metric5': {
-                'name': 'metric5',
-            },
-        }
-
-    def _evaluate_value(self, mapping, value):
-        return mapping.evaluate({'value': value})
 
     def test_conversion_expr(self):
-        parsed_mappings = parse_mappings(self.mappings)
+        mapping = load_metric_mapping(
+            file_path="nflex_connector_utils/tests/test_mapping.yaml"
+        )
+
+        params = {
+            "value": 10,
+        }
 
         self.assertEqual(
-            self._evaluate_value(
-                parsed_mappings['metric1']['conversion_expr'], 10
-            ),
+            mapping['metric1'].value(**params),
             100,
         )
 
         self.assertEqual(
-            self._evaluate_value(
-                parsed_mappings['metric2']['conversion_expr'], 10
-            ),
+            mapping['metric1'].unit(),
+            '%',
+        )
+
+        self.assertEqual(
+            mapping['metric2'].value(**params),
             1,
         )
 
         self.assertEqual(
-            self._evaluate_value(
-                parsed_mappings['metric3']['conversion_expr'], 10
-            ),
+            mapping['metric3'].value(**params),
             20,
         )
 
         self.assertEqual(
-            self._evaluate_value(
-                parsed_mappings['metric4']['conversion_expr'], 10
-            ),
+            mapping['metric4'].value(**params),
             0,
         )
 
         self.assertEqual(
-            parsed_mappings['metric5']['name'],
+            mapping['metric5'].name(),
             'metric5',
         )
