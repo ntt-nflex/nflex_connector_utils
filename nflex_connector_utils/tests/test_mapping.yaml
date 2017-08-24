@@ -1,0 +1,15 @@
+metric1:
+  name: metric1
+  unit: "%"
+  conversion_expr: value * 10
+metric2:
+  name: metric2
+  conversion_expr: value / 10
+metric3:
+  name: metric3
+  conversion_expr: value + 10
+metric4:
+  name: metric4
+  conversion_expr: value - 10
+metric5:
+  name: metric5

@@ -16,61 +16,132 @@ from pyparsing import (  # noqa
     oneOf,
     opAssoc,
 )
+
 import logging
 import operator
-
+import os
+import yaml
 
 _CONVERSION_KEY = 'conversion_expr'
 
+_DEFAULT_FILE_NAME = 'mapping.yaml'
 
-def parse_mappings(mappings):
+
+def load_metric_mapping(file_path=_DEFAULT_FILE_NAME):
     """
-    Parses through a selection of metric definition mappings
+    Loads a selection of metric definition mappings
     using SimpleExpressionParser.
-    Looks for conversion_expr in each metric definition and runs
+    It does so by mapping values per metric key to ParsedEntry value which
+    looks for conversion_expr in each metric definition and runs
     the logic on that field per evaluate mechanism.
 
+    :return: mapping: mapping of metric with conversion expression ready to be evaluated.
+    :rtype: dict of str: :class:`.ParsedEntry`
+
     Args:
-        mappings (dict): metric definition mappings
+        file_path (str): path to file (optional)
 
     Examples:
-        Setup mappings::
+        read mappings from mappings.yaml from current directory (or absolute path)::
 
-            mappings = {
-                'definition1': {
-                    'name': 'definition1',
-                    'conversion_expr': 'value * 10'
-                }
-            }
+            metric1:
+                name: metric1
+                unit: "%"
+                conversion_expr: value * 10
 
         Get original value::
 
-            metric_value = 10
+            value = 10
 
-        Parse the mappings::
+        Load mapping::
 
-            parsed_mappings = parse_mappings(mappings)
+            # can specify custom path by passing argument file_path
+            # example file_path='my_project/definition.yaml'
+            mapping = load_metric_mapping()
 
-        Evaluate metric definition based on initial value::
+        Evaluate metric based on initial value:
 
-            parsed_metric_definition = parsed_mappings['definition1']
-            if 'conversion_expr' in parsed_metric_definition:
-                # 10 * 10 = 100
-                parsed_metric_value = parsed_metric_definition['
-                'conversion_expr'].evaluate({
-                    "value": metric_value
-                })
+            See :class:`.ParsedEntry`
 
     """  # noqa
+
+    mapping = os.path.abspath(file_path)
+
+    with open(mapping) as f:
+        mapping = yaml.safe_load(f)
+
     parser = SimpleExpressionParser()
 
-    for item in mappings.values():
-            if _CONVERSION_KEY in item:
-                item[_CONVERSION_KEY] = parser.parse(
-                    item[_CONVERSION_KEY]
-                )
+    parsed_mapping = dict()
 
-    return mappings
+    for key, val in mapping.iteritems():
+        conversion = None
+        if _CONVERSION_KEY in val:
+            conversion = parser.parse(
+                val[_CONVERSION_KEY]
+            )
+
+        parsed_mapping[key] = ParsedEntry(
+            name=val.get('name', ''),
+            unit=val.get('unit', ''),
+            conversion=conversion,
+        )
+
+    return parsed_mapping
+
+
+class ParsedEntry(object):
+    """Represents a parsed mapping entry"""
+
+    def __init__(self, name, unit, conversion=None):
+        self._name = name
+        self._unit = unit
+        self._conversion = conversion
+
+    def value(self, **kwargs):
+        """
+        Evaluates conversion expression if it has one based on kwargs input.
+        :raises VariableLookupError: failed to evaluate expression based on variables given.
+
+        :return: value: evaluated value or original value if definition has no conversion expression
+
+        Args:
+            **kwargs(dict) - variables to evaluate on conversion_exr property of specified definition. The original value should be expressed as kwargs['value']
+
+        Examples:
+
+            See :func:`.load_metric_mapping` for load example
+
+            Evaluate metric based on initial value::
+
+                metric = mapping['metric1']
+                try:
+                    # 10 * 10 = 100
+                    value = metric.value(**{
+                        "value": 10,
+                    })
+                except VariableLookupError as e:
+                    raise e
+
+                name = metric.name()
+                unit = metric.unit()
+        """  # noqa
+
+        if not self._conversion:
+            try:
+                return kwargs['value']
+            except KeyError as e:
+                raise VariableLookupError(e)
+
+        return self._conversion.evaluate(kwargs)
+
+    def unit(self):
+        """Retrieves metric's unit"""
+        return self._unit
+
+    def name(self):
+        """Retrieves metric's name"""
+        return self._name
 
 
 class ExpressionParser(object):
