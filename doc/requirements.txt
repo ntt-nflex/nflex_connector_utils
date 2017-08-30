@@ -4,6 +4,7 @@ python-dateutil
 pytz
 six
 pyparsing
+pyyaml
 
 # For docs
 sphinxcontrib.napoleon
