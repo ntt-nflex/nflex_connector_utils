@@ -54,7 +54,7 @@ class Logger():
         self.template = "Target(customer: {customer_id},"\
             "account: {account_id}, resource: {resource_id}): {body}"
 
-        severities = ['info', 'warn', 'error']
+        severities = ['info', 'warn', 'error', 'exception']
         from functools import partial
         for severity in severities:
             setattr(self, severity, partial(self._log, severity))
