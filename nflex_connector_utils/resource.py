@@ -31,17 +31,15 @@ class Resource(object):
         self._check_not_none_str_value('name', self.name)
         self._check_not_none_str_value('type', self.type)
 
-        self._provider_created_at = provider_created_at
+        self.provider_created_at = provider_created_at
 
-        if connections is None:
-            connections = Connections()
-        self._connections = connections
+        self.connections = connections
 
         if metadata is None:
             metadata = Metadata()
-        self._metadata = metadata
-        self._region = region
-        self._locations = locations
+        self.metadata = metadata
+        self.region = region
+        self.locations = locations
         self._native_portal_link = native_portal_link
 
     def _check_not_none_str_value(self, name, value):
@@ -51,11 +49,13 @@ class Resource(object):
     def serialize(self):
         """Serialize the contents"""
 
-        provider_created_at = convert_datetime(self._provider_created_at)
+        provider_created_at = convert_datetime(self.provider_created_at)
 
         regions = []
-        if self._region is not None:
-            regions = [self._region.serialize()]
+        if self.region is not None:
+            regions = [self.region.serialize()]
+
+        connections = self.connections or Connections()
 
         results = {
             "id": self.id,
@@ -65,22 +65,22 @@ class Resource(object):
                 "provider_created_at": provider_created_at,
                 'last_seen_at': convert_datetime(datetime.utcnow()),
             },
-            "connections": self._connections.serialize(),
-            "metadata": self._metadata.serialize(),
+            "connections": connections.serialize(),
+            "metadata": self.metadata.serialize(),
         }
 
         if self._native_portal_link is not None:
             results['base']['native_portal_link'] = self._native_portal_link
 
         locations = []
-        if self._locations is not None:
-            locations = self._locations.serialize()
+        if self.locations is not None:
+            locations = self.locations.serialize()
         if len(locations) > 0:
             results['base']['locations'] = locations
         else:
             regions = []
-            if self._region is not None:
-                regions = [self._region.serialize()]
+            if self.region is not None:
+                regions = [self.region.serialize()]
             results['base']['regions'] = regions
 
         return results

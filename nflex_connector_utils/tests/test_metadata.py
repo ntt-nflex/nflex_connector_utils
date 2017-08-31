@@ -15,6 +15,9 @@ class TestMetadata(object):
         test_init([], None, {})
         test_init([('key', 'value')], None, {self.NS_PS: {'key': 'value'}})
         test_init([('ns', 'key', 'value')], None, {'ns': {'key': 'value'}})
+        test_init([('ns',)], None, {})
+        test_init({}, None, {})
+        test_init('foo', None, {})
 
         m = Metadata()
         m.add('key1', 'value1')
