@@ -84,6 +84,7 @@ def load_metric_mapping(file_path=_DEFAULT_FILE_NAME):
         parsed_mapping[key] = ParsedEntry(
             name=val.get('name', ''),
             unit=val.get('unit', ''),
+            counter=val.get('counter', False),
             conversion=conversion,
         )
 
@@ -93,9 +94,10 @@ def load_metric_mapping(file_path=_DEFAULT_FILE_NAME):
 class ParsedEntry(object):
     """Represents a parsed mapping entry"""
 
-    def __init__(self, name, unit, conversion=None):
+    def __init__(self, name, unit, counter, conversion=None):
         self._name = name
         self._unit = unit
+        self._counter = counter
         self._conversion = conversion
 
     def value(self, **kwargs):
@@ -125,6 +127,7 @@ class ParsedEntry(object):
 
                 name = metric.name()
                 unit = metric.unit()
+                counter = metric.counter()
         """  # noqa
 
         if not self._conversion:
@@ -142,6 +145,10 @@ class ParsedEntry(object):
     def name(self):
         """Retrieves metric's name"""
         return self._name
+
+    def counter(self):
+        """Retrieves metric's counter"""
+        return self._counter
 
 
 class ExpressionParser(object):
