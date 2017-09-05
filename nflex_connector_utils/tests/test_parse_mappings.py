@@ -33,12 +33,18 @@ class TestParseMappings(TestCase):
             20,
         )
 
+        self.assertEqual(mapping['metric3'].counter(), False)
+
         self.assertEqual(
             mapping['metric4'].value(**params),
             0,
         )
 
+        self.assertEqual(mapping['metric4'].counter(), False)
+
         self.assertEqual(
             mapping['metric5'].name(),
             'metric5',
         )
+
+        self.assertEqual(mapping['metric5'].counter(), True)

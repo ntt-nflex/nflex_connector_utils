@@ -11,5 +11,7 @@ metric3:
 metric4:
   name: metric4
   conversion_expr: value - 10
+  counter: False
 metric5:
   name: metric5
+  counter: True
