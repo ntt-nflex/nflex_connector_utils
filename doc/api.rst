@@ -45,3 +45,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.logger
    :members:
+.. automodule:: nflex_connector_utils.time
+   :members:
