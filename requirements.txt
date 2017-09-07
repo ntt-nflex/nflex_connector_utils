@@ -6,3 +6,4 @@ pytz
 six
 pyparsing
 pyyaml
+freezegun
