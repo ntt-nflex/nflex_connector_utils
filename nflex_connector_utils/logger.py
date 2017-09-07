@@ -8,7 +8,9 @@ class Logger():
         - The output distination can be changed easily between context.log and print
         - When you execute via flexer or GUI for test, you need to use "print" so you
           can see log from the result of flexer api(GUI used this api implicitly) you
-          need to use "context.log" so you can see log at module status page.
+          need to use "context.log" so you can see log at module status page. Through
+          the context.module_id we dynamically know when it should use the logs
+          API as this parameter is only set on production environments.
 
         Args:
 
@@ -66,7 +68,7 @@ class Logger():
             resource_id=self.resource_id,
             body=body
             )
-        if self.context:
+        if self.context.module_id:
             self.context.log(prettied, severity)
         else:
             print(severity + '\t' + prettied)
