@@ -17,42 +17,50 @@ class TestSetupTimeInterval(TestCase):
         time_format = '%Y-%m-%dT%H:%M:%S.%fZ'
         now = datetime.utcnow()
 
-        o1 = setup_time_interval(
-                last_update=now.strftime(time_format),
-                poll_interval=15*60,
+        start_time, end_time, info = setup_time_interval(
+                event={
+                    'last_update': now.strftime(time_format),
+                    'resource': {
+                        'poll_interval': 15*60,
+                    },
+                },
                 backfill_time=3600,
                 interval=5*60,
                 skew=10*60,
         )
 
-        self.assertEqual(o1['start_time'], now)
-        self.assertEqual(
-            o1['end_time'],
-            now - timedelta(seconds=10*60),
-        )
-        self.assertEqual(o1['debug'], '')
+        self.assertEqual(start_time, now)
+        self.assertEqual(end_time, now - timedelta(seconds=10*60))
+        self.assertEqual(info, '')
 
-        o2 = setup_time_interval(
-                last_update=None,
-                poll_interval=25*60,
+        start_time, end_time, info = setup_time_interval(
+                event={
+                    'last_update': None,
+                    'resource': {
+                        'poll_interval': 25*60,
+                    },
+                },
                 backfill_time=3600,
                 interval=11*60,
         )
 
-        self.assertEqual(
-            o2['start_time'],
-            now - timedelta(seconds=25*60 + 11*60)
-        )
-        self.assertEqual(o2['end_time'], now)
-        self.assertNotEqual(o2['debug'], '')
+        self.assertEqual(start_time, now - timedelta(seconds=25*60 + 11*60))
+        self.assertEqual(end_time, now)
+        self.assertNotEqual(info, '')
 
-        o3 = setup_time_interval(
-                last_update=(now - timedelta(hours=2)).strftime(time_format),
-                poll_interval=25*60,
+        start_time, end_time, info = setup_time_interval(
+                event={
+                    'last_update': (now - timedelta(hours=2)).strftime(
+                        time_format
+                    ),
+                    'resource': {
+                        'poll_interval': 25*60,
+                    },
+                },
                 backfill_time=3600,
                 interval=11*60,
         )
 
-        self.assertEqual(o3['start_time'], now - timedelta(hours=2))
-        self.assertEqual(o3['end_time'], now - timedelta(seconds=3600))
-        self.assertNotEqual(o3['debug'], '')
+        self.assertEqual(start_time, now - timedelta(hours=2))
+        self.assertEqual(end_time, now - timedelta(seconds=3600))
+        self.assertNotEqual(info, '')
