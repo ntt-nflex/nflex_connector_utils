@@ -47,7 +47,6 @@ def setup_time_interval(event, backfill_time=0, interval=0,
 
             output = setup_time_interval(
                 event=event,
-                poll_interval=15*60,
                 backfill_time=3600,
                 interval=5*60,
                 skew=5*60,
