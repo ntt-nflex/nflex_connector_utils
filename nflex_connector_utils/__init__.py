@@ -19,6 +19,7 @@ from colo_space import ColoSpace  # noqa
 from circuit import Circuit  # noqa
 from parser import load_metric_mapping, VariableLookupError, ParsedEntry  # noqa
 from logger import Logger  # noqa
+from time import setup_time_interval  # noqa
 
 from ._version import get_versions
 __version__ = get_versions()['version']
