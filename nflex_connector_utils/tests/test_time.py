@@ -25,7 +25,7 @@ class TestSetupTimeInterval(TestCase):
                     },
                 },
                 backfill_time=3600,
-                interval=5*60,
+                initial_interval=5*60,
                 skew=10*60,
         )
 
@@ -40,7 +40,7 @@ class TestSetupTimeInterval(TestCase):
                     },
                 },
                 backfill_time=3600,
-                interval=11*60,
+                initial_interval=11*60,
         )
 
         self.assertEqual(start_time, now - timedelta(seconds=25*60 + 11*60))
@@ -56,7 +56,7 @@ class TestSetupTimeInterval(TestCase):
                     },
                 },
                 backfill_time=3600,
-                interval=11*60,
+                initial_interval=11*60,
         )
 
         self.assertEqual(start_time, now - timedelta(hours=2))
