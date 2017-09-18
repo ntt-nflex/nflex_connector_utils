@@ -19,6 +19,11 @@ class TestParseMappings(TestCase):
         )
 
         self.assertEqual(
+            mapping['metric1'].convert(**params),
+            100,
+        )
+
+        self.assertEqual(
             mapping['metric1'].unit(),
             '%',
         )
@@ -29,7 +34,17 @@ class TestParseMappings(TestCase):
         )
 
         self.assertEqual(
+            mapping['metric2'].convert(**params),
+            1,
+        )
+
+        self.assertEqual(
             mapping['metric3'].value(**params),
+            20,
+        )
+
+        self.assertEqual(
+            mapping['metric3'].convert(**params),
             20,
         )
 
@@ -37,6 +52,11 @@ class TestParseMappings(TestCase):
 
         self.assertEqual(
             mapping['metric4'].value(**params),
+            0,
+        )
+
+        self.assertEqual(
+            mapping['metric4'].convert(**params),
             0,
         )
 
