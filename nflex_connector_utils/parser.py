@@ -100,6 +100,27 @@ class ParsedEntry(object):
         self._counter = counter
         self._conversion = conversion
 
+    def convert(self, **kwargs):
+        """
+        Different syntax for :func:`value`
+
+        Evaluate metric based on initial value::
+
+                metric = mapping['metric1']
+                try:
+                    # 10 * 10 = 100
+                    value = metric.convert(
+                        value=10,
+                    )
+                except VariableLookupError as e:
+                    raise e
+
+                name = metric.name()
+                unit = metric.unit()
+                counter = metric.counter()
+        """
+        return self.value(**kwargs)
+
     def value(self, **kwargs):
         """
         Evaluates conversion expression if it has one based on kwargs input.
@@ -119,9 +140,9 @@ class ParsedEntry(object):
                 metric = mapping['metric1']
                 try:
                     # 10 * 10 = 100
-                    value = metric.value(**{
-                        "value": 10,
-                    })
+                    value = metric.value(
+                        value=10,
+                    )
                 except VariableLookupError as e:
                     raise e
 
