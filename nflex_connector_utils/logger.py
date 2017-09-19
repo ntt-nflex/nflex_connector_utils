@@ -5,7 +5,7 @@ class Logger():
 
         - Each log message has header including customer_id, account_id, resource_id
           (optional).
-        - The output distination can be changed easily between context.log and print
+        - The output destination can be changed easily between context.log and print
         - When you execute via flexer or GUI for test, you need to use "print" so you
           can see log from the result of flexer api(GUI used this api implicitly) you
           need to use "context.log" so you can see log at module status page. Through
