@@ -7,7 +7,7 @@ _DEFAULT_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
 _DEFAULT_POLL_INTERVAL = 60 * 15  # 15 minutes
 
 
-def setup_time_interval(event, backfill_time=0, initial_interval=0,
+def setup_time_interval(event, backfill_time=None, initial_interval=0,
                         skew=0, time_format=_DEFAULT_TIME_FORMAT, logger=None):
 
     """
@@ -91,7 +91,7 @@ def setup_time_interval(event, backfill_time=0, initial_interval=0,
     else:
         start_time = datetime.strptime(last_update, time_format)
         diff = (end_time - start_time).total_seconds()
-        if diff > backfill_time:
+        if backfill_time and diff > backfill_time:
             end_time = start_time + timedelta(seconds=backfill_time)
             info += "Backfilling start_time %s end_time %s" \
                     "\nMax backfill time is %s hours" \
