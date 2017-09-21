@@ -47,3 +47,5 @@ API
    :members:
 .. automodule:: nflex_connector_utils.time
    :members:
+.. automodule:: nflex_connector_utils.errors
+   :members:
