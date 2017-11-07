@@ -174,7 +174,7 @@ class ParsedEntry(object):
         """Retrieves metric's counter"""
         return self._counter
     
-    def specialisation(self);
+    def specialisation(self):
         """Retrieves metric's specialisation"""
         return self._specialisation
 
