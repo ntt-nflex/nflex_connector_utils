@@ -74,8 +74,25 @@ def setup_time_interval(event, backfill_time=None, initial_interval=0,
     """  # noqa
 
     last_update = event.get('last_update', None)
-    poll_interval = event['resource']. \
-        get('poll-interval', _DEFAULT_POLL_INTERVAL)
+
+    try:
+        # nflex-scheduler's poll_interval
+        poll_interval = event['poll_interval']
+        val = poll_interval[:-1]
+        measurement = poll_interval[-1:]
+
+        if measurement == 'm':
+            poll_interval = val * 60
+        elif measurement == 's':
+            poll_interval = val
+        elif measurement == 'h':
+            poll_interval = val * 60 * 60
+        else:
+            poll_interval = _DEFAULT_POLL_INTERVAL
+
+    except KeyError:
+        poll_interval = event['resource']. \
+            get('poll-interval', _DEFAULT_POLL_INTERVAL)
 
     info = ''
     end_time = datetime.utcnow() - timedelta(seconds=skew)
