@@ -22,15 +22,15 @@ class Account(object):
 
         return results
 
-    def update(self, api, account_id):
+    def update(self, context, account_id):
         """Updates CMP account"""
 
-        if account_id is None:
+        if account_id is None or context.module_id is None:
             '''For testing purposes, if the event doesn't have an account_id,
                don't bother trying to POST to the accounts API.'''
             return
 
-        response = api.patch(
+        response = context.api.patch(
             path='/accounts/%s/resource' % account_id,
             data=self.serialize())
         if response.status_code != httplib.OK:
