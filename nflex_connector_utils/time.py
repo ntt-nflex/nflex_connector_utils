@@ -92,7 +92,7 @@ def setup_time_interval(event, backfill_time=None, initial_interval=0,
 
     except KeyError:
         poll_interval = event['resource']. \
-            get('poll-interval', _DEFAULT_POLL_INTERVAL)
+            get('poll_interval', _DEFAULT_POLL_INTERVAL)
 
     info = ''
     end_time = datetime.utcnow() - timedelta(seconds=skew)
