@@ -21,7 +21,7 @@ class TestSetupTimeInterval(TestCase):
                 event={
                     'last_update': now.strftime(time_format),
                     'resource': {
-                        'poll-interval': 15*60,
+                        'poll_interval': 15*60,
                     },
                 },
                 backfill_time=3600,
@@ -36,7 +36,7 @@ class TestSetupTimeInterval(TestCase):
                 event={
                     'last_update': None,
                     'resource': {
-                        'poll-interval': 25*60,
+                        'poll_interval': 25*60,
                     },
                 },
                 backfill_time=3600,
@@ -52,7 +52,7 @@ class TestSetupTimeInterval(TestCase):
                         time_format
                     ),
                     'resource': {
-                        'poll-interval': 25*60,
+                        'poll_interval': 25*60,
                     },
                 },
                 backfill_time=3600,
