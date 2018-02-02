@@ -78,7 +78,7 @@ def setup_time_interval(event, backfill_time=None, initial_interval=0,
     try:
         # nflex-scheduler's poll_interval
         poll_interval = event['poll_interval']
-        val = poll_interval[:-1]
+        val = int(poll_interval[:-1])
         measurement = poll_interval[-1:]
 
         if measurement == 'm':
