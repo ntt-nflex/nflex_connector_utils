@@ -21,7 +21,7 @@ class TestSetupTimeInterval(TestCase):
         start_time, end_time = setup_time_interval(
                 event={
                     'last_update': now.strftime(_TIME_FORMAT),
-                    'poll_interval': '15m',
+                    'poll_interval': 15*60,
                 },
                 backfill_time=3600,
                 initial_interval=5*60,
@@ -34,7 +34,7 @@ class TestSetupTimeInterval(TestCase):
         start_time, end_time = setup_time_interval(
                 event={
                     'last_update': None,
-                    'poll_interval': '25m',
+                    'poll_interval': 25*60,
                 },
                 backfill_time=3600,
                 initial_interval=11*60,
@@ -46,7 +46,7 @@ class TestSetupTimeInterval(TestCase):
         start_time, end_time = setup_time_interval(
                 event={
                     'last_update': None,
-                    'poll_interval': '25s',
+                    'poll_interval': 25,
                 },
                 backfill_time=3600,
                 initial_interval=11*60,
@@ -58,7 +58,7 @@ class TestSetupTimeInterval(TestCase):
         start_time, end_time = setup_time_interval(
                 event={
                     'last_update': None,
-                    'poll_interval': '1h',
+                    'poll_interval': 60*60,
                 },
                 backfill_time=3600,
                 initial_interval=11*60,
@@ -72,7 +72,7 @@ class TestSetupTimeInterval(TestCase):
                     'last_update': (now - timedelta(hours=2)).strftime(
                         _TIME_FORMAT
                     ),
-                    'poll_interval': '25m'
+                    'poll_interval': 25*60
                 },
                 backfill_time=3600,
                 initial_interval=11*60,
