@@ -41,7 +41,7 @@ class Server(Resource):
         self._provider_state = provider_state
 
         self._instance_type = instance_type
-        self._image_detail = image_detail
+        self.image_detail = image_detail
 
         if ip_addresses is None:
             ip_addresses = []
@@ -69,8 +69,8 @@ class Server(Resource):
 
         type_details = data['details'][self.type]
 
-        if self._image_detail is not None:
-            type_details['image_detail'] = self._image_detail.serialize()
+        if self.image_detail is not None:
+            type_details['image_detail'] = self.image_detail.serialize()
         else:
             type_details['image_detail'] = None
 
