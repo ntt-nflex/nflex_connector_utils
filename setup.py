@@ -1,10 +1,13 @@
-from pip.req import parse_requirements
-import uuid
 import versioneer
 from setuptools import setup, find_packages
 
-requirements = parse_requirements('requirements.txt', session=uuid.uuid1())
-install_requires = [str(r.req) for r in requirements]
+
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
+
+install_requires = parse_requirements('requirements.txt')
 description = """nflex-connector-utils provides a suite of tools to produce data structures when implementing resources connector nflex modules."""  # noqa
 
 long_description = """
