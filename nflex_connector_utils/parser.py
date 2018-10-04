@@ -1,4 +1,8 @@
 from __future__ import division
+import logging
+import operator
+import os
+
 from pyparsing import (  # noqa
     CaselessKeyword,
     CaselessLiteral,
@@ -16,10 +20,7 @@ from pyparsing import (  # noqa
     oneOf,
     opAssoc,
 )
-
-import logging
-import operator
-import os
+import six
 import yaml
 
 _CONVERSION_KEY = 'conversion_expr'
@@ -35,14 +36,16 @@ def load_metric_mapping(file_path=_DEFAULT_FILE_NAME):
     looks for conversion_expr in each metric definition and runs
     the logic on that field per evaluate mechanism.
 
-    :return: mapping: mapping of metric with conversion expression ready to be evaluated.
+    :return: mapping: mapping of metric with conversion expression ready to
+    be evaluated.
     :rtype: dict of str: :class:`.ParsedEntry`
 
     Args:
         file_path (str): path to file (optional)
 
     Examples:
-        read mappings from mappings.yaml from current directory (or absolute path)::
+        read mappings from mappings.yaml from current directory
+        (or absolute path):
 
             metric1:
                 name: metric1
@@ -74,7 +77,7 @@ def load_metric_mapping(file_path=_DEFAULT_FILE_NAME):
 
     parsed_mapping = dict()
 
-    for key, val in mapping.iteritems():
+    for key, val in six.iteritems(mapping):
         conversion = None
         if _CONVERSION_KEY in val:
             conversion = parser.parse(
@@ -127,12 +130,16 @@ class ParsedEntry(object):
     def value(self, **kwargs):
         """
         Evaluates conversion expression if it has one based on kwargs input.
-        :raises VariableLookupError: failed to evaluate expression based on variables given.
+        :raises VariableLookupError: failed to evaluate expression based on
+        variables given.
 
-        :return: value: evaluated value or original value if definition has no conversion expression
+        :return: value: evaluated value or original value if definition has
+        no conversion expression
 
         Args:
-            **kwargs(dict) - variables to evaluate on conversion_exr property of specified definition. The original value should be expressed as kwargs['value']
+            **kwargs(dict) - variables to evaluate on conversion_exr property
+            of specified definition. The original value should be expressed as
+            kwargs['value']
 
         Examples:
 
@@ -205,7 +212,7 @@ class ExpressionParser(object):
             return self.pattern.parseString(expression)[0]
 
         except ParseException as e:
-            logging.warn('Failed to parse "%s": %s' % (expression, e))
+            logging.warning('Failed to parse "%s": %s', expression, e)
 
         return None
 
@@ -232,7 +239,7 @@ class TernaryExpressionParser(ExpressionParser):
 
 class CaseExpressionParser(TernaryExpressionParser):
     """Takes care of parsing (nested) SQL CASE statements with variables"""
-    def __init__(self):
+    def __init__(self):  # noqa
         super(CaseExpressionParser, self).__init__()
         CASE = CaselessKeyword('case').suppress()
         WHEN = CaselessKeyword('when').suppress()
@@ -266,11 +273,12 @@ class CaseExpressionParser(TernaryExpressionParser):
 
         ELSE_EXPR = ELSE + ARITH_EXPR.setResultsName('else_expr')
 
-        self.CASE_EXPR << (
+        self.CASE_EXPR <<= (
             CASE +
             OneOrMore(WHEN_EXPR + THEN_EXPR) + Optional(ELSE_EXPR) +
             END
-        ).setParseAction(CaseStatement)
+        )
+        self.CASE_EXPR.setParseAction(CaseStatement)
         self.pattern = self.CASE_EXPR + StringEnd()
 
 
@@ -334,7 +342,9 @@ class Condition(object):
 
 class CaseStatement(object):
     def __init__(self, tokens):
-        self.if_then_pairs = zip(tokens['when_expr'], tokens['then_expr'])
+        self.if_then_pairs = list(
+            zip(tokens['when_expr'], tokens['then_expr'])
+        )
         self.else_value = tokens.get('else_expr')
 
     def evaluate(self, variables):

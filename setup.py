@@ -7,6 +7,7 @@ def parse_requirements(filename):
     lineiter = (line.strip() for line in open(filename))
     return [line for line in lineiter if line and not line.startswith("#")]
 
+
 install_requires = parse_requirements('requirements.txt')
 description = """nflex-connector-utils provides a suite of tools to produce data structures when implementing resources connector nflex modules."""  # noqa
 
@@ -37,8 +38,10 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2 :: Only',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development',
     ],
 )

@@ -13,13 +13,13 @@ MCCABE_VERSION = '0.4.0'
 
 # Check versions
 if pep8.__version__ != PEP_VERSION:
-    print 'The git hooks require pep8 version %s' % PEP_VERSION
+    print('The git hooks require pep8 version %s' % PEP_VERSION)
 
 if pyflakes.__version__ != PYFLAKES_VERSION:
-    print 'The git hooks require pyflakes version %s' % PYFLAKES_VERSION
+    print('The git hooks require pyflakes version %s' % PYFLAKES_VERSION)
 
 if mccabe.__version__ != MCCABE_VERSION:
-    print 'The git hooks require mccabe version %s' % MCCABE_VERSION
+    print('The git hooks require mccabe version %s' % MCCABE_VERSION)
 
 
 STRICT = os.getenv('FLAKE8_STRICT', True)

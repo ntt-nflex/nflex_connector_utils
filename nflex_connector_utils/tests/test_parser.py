@@ -1,9 +1,10 @@
+from unittest import TestCase
+
 from nflex_connector_utils.parser import (
     ExpressionParser,
     CaseExpressionParser,
     VariableLookupError,
 )
-from unittest import TestCase
 
 
 class TestExpressionParser(TestCase):

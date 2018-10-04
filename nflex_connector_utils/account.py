@@ -1,4 +1,4 @@
-import httplib
+from six.moves import http_client
 
 
 class Account(object):
@@ -33,7 +33,7 @@ class Account(object):
         response = context.api.patch(
             path='/accounts/%s/resource' % account_id,
             data=self.serialize())
-        if response.status_code != httplib.OK:
+        if response.status_code != http_client.OK:
             raise Exception(
                 'Got bad response from account API: %d, %s' % (
                     response.status_code, response.content))
